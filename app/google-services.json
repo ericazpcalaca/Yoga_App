@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "924057228807",
+    "project_id": "yoga-app-ezpc",
+    "storage_bucket": "yoga-app-ezpc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924057228807:android:dc3e1f06a789ba720cfca2",
+        "android_client_info": {
+          "package_name": "com.example.yoga_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "924057228807-73rrmp4arjomgoe1rs3p6om5jl3poi7p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADKWYzip8KU-tIKm4-uu64l0EM3gogBIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "924057228807-73rrmp4arjomgoe1rs3p6om5jl3poi7p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
