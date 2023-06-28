@@ -7,4 +7,5 @@
     <string name="txtResetPassword">Forgot Password?</string>
     <string name="txtRegister">Register</string>
     <string name="btnLogout">Logout</string>
+    <string name="btnRecovery">Recovery Password</string>
 </resources>

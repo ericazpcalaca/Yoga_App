@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class Login extends AppCompatActivity {
 
     private TextView btnRegister;
+    private TextView btnRecovery;
     private EditText textEmail;
     private EditText textPassword;
     private Button btnLogin;
@@ -44,6 +45,7 @@ public class Login extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         btnRegister = findViewById(R.id.signUp);
+        btnRecovery = findViewById(R.id.resetPassword);
         btnLogin = findViewById(R.id.btnLogin);
         textEmail = findViewById(R.id.inputEmail);
         textPassword = findViewById(R.id.inputPassword);
@@ -92,6 +94,13 @@ public class Login extends AppCompatActivity {
                             }
                         });
 
+            }
+        });
+
+        btnRecovery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this,Recovery.class));
             }
         });
     }
