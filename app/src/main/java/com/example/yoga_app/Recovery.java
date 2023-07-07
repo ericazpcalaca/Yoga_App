@@ -18,6 +18,7 @@ public class Recovery extends AppCompatActivity {
     private Button btnReset;
     private EditText txtEmail;
     private FirebaseAuth mAuth;
+    private androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,16 @@ public class Recovery extends AppCompatActivity {
 
         txtEmail = findViewById(R.id.rEmail);
         btnReset = findViewById(R.id.btnRecoverPassword);
+        toolbar = findViewById(R.id.toolbarRecovery);
+
+        //Set a back to main page button on top
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_24);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
