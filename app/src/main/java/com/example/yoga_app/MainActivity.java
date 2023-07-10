@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Home()).commit();
             navigationView.setCheckedItem(R.id.home);
+            toolbar.setTitle("Yoga");
         }
 
 
@@ -65,14 +66,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            textView.setText(user.getEmail());
 //        }
 //
-//        btnLogout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FirebaseAuth.getInstance().signOut();
-//                startActivity(new Intent(getApplicationContext(),Login.class));
-//                finish();
-//            }
-//        });
 
 
     }
@@ -93,18 +86,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Home()).commit();
                 drawer.closeDrawer(GravityCompat.START);
+                toolbar.setTitle("Yoga");
                 break;
             case R.id.explore:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Explore()).commit();
                 drawer.closeDrawer(GravityCompat.START);
+                toolbar.setTitle("Explore");
                 break;
             case R.id.progress:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DailyProgress()).commit();
                 drawer.closeDrawer(GravityCompat.START);
+                toolbar.setTitle("Daily Progress");
                 break;
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Profile()).commit();
                 drawer.closeDrawer(GravityCompat.START);
+                toolbar.setTitle("Profile");
                 break;
             case R.id.nav_share:
                 Toast.makeText(this,"Share",Toast.LENGTH_SHORT).show();

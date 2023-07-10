@@ -35,8 +35,10 @@ public class Profile extends Fragment {
             startActivity(new Intent(getContext(), Login.class));
             getActivity().finish();
         } else {
+
             textView.setText(user.getEmail());
         }
+
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
