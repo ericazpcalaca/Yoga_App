@@ -3,5 +3,6 @@
     <style name="Theme.Yoga_App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 </resources>
