@@ -86,20 +86,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    // When the user clicks on the item in the menu, it goes to the selected fragment and closes the menu
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Home()).commit();
+                drawer.closeDrawer(GravityCompat.START);
                 break;
             case R.id.explore:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Explore()).commit();
+                drawer.closeDrawer(GravityCompat.START);
                 break;
             case R.id.progress:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new DailyProgress()).commit();
+                drawer.closeDrawer(GravityCompat.START);
                 break;
             case R.id.profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Profile()).commit();
+                drawer.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_share:
                 Toast.makeText(this,"Share",Toast.LENGTH_SHORT).show();
