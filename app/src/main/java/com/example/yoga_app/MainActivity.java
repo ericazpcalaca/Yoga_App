@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this,"Send",Toast.LENGTH_SHORT).show();
                 break;
         }
-
         return true;
     }
 }
