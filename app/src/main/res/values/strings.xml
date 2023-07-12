@@ -16,4 +16,8 @@
     <string name="txtProfile">Profile</string>
     <string name="btnAccount">Account Settings</string>
     <string name="txtReminder">Set Reminder</string>
+    <string name="txtTitle">Good Morning</string>
+    <string name="txtPoseL">Pose Library</string>
+    <string name="txtFocus">Focus</string>
+    <string name="btnSuggest">Suggest a feature</string>
 </resources>
