@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".PoseLibrary">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarPoseLibrary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/teal_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"

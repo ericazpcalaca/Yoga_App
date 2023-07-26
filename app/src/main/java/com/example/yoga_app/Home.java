@@ -25,14 +25,14 @@ public class Home extends Fragment {
             @Override
             public void onClick(View v) {
                 // Handle button click event
-                openActivity();
+                openPoseLibrary();
             }
         });
 
         return view;
     }
 
-    private void openActivity() {
+    private void openPoseLibrary() {
         Intent intent = new Intent(getActivity(), PoseLibrary.class);
         startActivity(intent);
     }

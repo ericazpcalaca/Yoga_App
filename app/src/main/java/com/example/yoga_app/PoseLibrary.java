@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,11 +29,24 @@ public class PoseLibrary extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private ArrayList<YogaPose> poseList;
+    private androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pose_library);
+
+        toolbar = findViewById(R.id.toolbarPoseLibrary);
+
+        //Set a back to main page button on top
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_24);
+        toolbar.setTitle("Poses");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
@@ -52,8 +66,10 @@ public class PoseLibrary extends AppCompatActivity {
                         for(int i = 0; i < response.length(); i++){
                             JSONObject jsonObject = response.getJSONObject(i);
                             String poseName = jsonObject.getString("english_name");
+                            String poseDescription = jsonObject.getString("pose_description");
+                            String poseBenefits = jsonObject.getString("pose_benefits");
                             String urlImage = jsonObject.getString("url_png");
-                            YogaPose yogaPose = new YogaPose(poseName, urlImage);
+                            YogaPose yogaPose = new YogaPose(poseName, poseDescription, poseBenefits, urlImage);
                             poseList.add(yogaPose);
                         }
 
@@ -71,36 +87,7 @@ public class PoseLibrary extends AppCompatActivity {
                     }
                 });
         requestQueue.add(jsonArrayRequest);
+        //Check dialog fragment
 
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-//                (Request.Method.GET, url, null, response -> {
-//                    try {
-//                        JSONArray jsonArray = response.getJSONArray("0");
-//
-//
-//                        Toast.makeText(PoseLibrary.this, "Entroooo", Toast.LENGTH_LONG).show();
-//
-//                        for (int i = 0; i < jsonArray.length(); i++) {
-//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                            String title = jsonObject.getString("english_name");
-//                            String imgUrl = jsonObject.getString("url_png");
-//
-//                            YogaPose yogaPose = new YogaPose(title, imgUrl);
-//                            poseList.add(yogaPose);
-//                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                    adapter = new RecyclerAdapter(PoseLibrary.this, poseList);
-//                    recyclerView.setAdapter(adapter);
-//
-//                }, new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        //TODO: Handle error
-//                        Toast.makeText(PoseLibrary.this, error.getMessage(), Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//        requestQueue.add(jsonObjectRequest);
     }
 }
