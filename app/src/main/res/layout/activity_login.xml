@@ -16,6 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:autofillHints=""
+        android:paddingStart="15dp"
+        android:paddingBottom="20dp"
         android:hint="@string/txtInputEmail"
         android:inputType="textWebEmailAddress"
         android:textAlignment="textStart"
@@ -23,17 +25,28 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/inputPassword"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:autofillHints=""
         android:hint="@string/txtInputPassword"
-        android:inputType="textPassword"
+        android:background="@color/white"
         android:textColorHint="#78909C"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:inputType="textPassword"
+            android:background="@color/white"
+            android:textColorHint="#78909C"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <TextView
         android:id="@+id/resetPassword"
