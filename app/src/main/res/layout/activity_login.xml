@@ -7,8 +7,16 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="15dp"
+    android:background="@color/green_light"
     tools:context=".Login">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="234dp"
+        android:layout_height="126dp"
+        app:srcCompat="@drawable/yogaapp"
+        android:layout_marginBottom="30dp"
+        />
 
     <EditText
         android:id="@+id/inputEmail"
@@ -21,7 +29,7 @@
         android:hint="@string/txtInputEmail"
         android:inputType="textWebEmailAddress"
         android:textAlignment="textStart"
-        android:textColorHint="#78909C"
+        android:textColorHint="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -29,8 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/txtInputPassword"
-        android:background="@color/white"
-        android:textColorHint="#78909C"
+        android:background="@color/green_light"
+        android:textColorHint="@color/black"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -39,14 +47,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:inputType="textPassword"
-            android:background="@color/white"
+            android:background="@color/green_light"
             android:textColorHint="#78909C"
             android:textSize="20sp"
             android:textStyle="bold"
             />
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
     <TextView
         android:id="@+id/resetPassword"
@@ -60,13 +66,17 @@
         android:id="@+id/btnLogin"
         android:text="@string/btnLogin"
         android:layout_marginTop="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:textSize="17sp"
+        android:background="@drawable/custom_buttom"/>
 
     <TextView
         android:id="@+id/signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:background=""
         android:text="@string/txtSignup" />
+
 </LinearLayout>

@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".Register">
 
+    <TextView
+        android:id="@+id/txtTitleRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:text="CREATE ACCOUNT"
+        app:layout_constraintBottom_toTopOf="@+id/inputEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarRegister"
         android:layout_width="match_parent"
