@@ -19,7 +19,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/cardview_shadow_start_color"
+            android:background="@color/green_one"
             android:id="@+id/toolbar"
             app:popupTheme="@style/Theme.AppCompat.Light"
             android:elevation="4dp"/>
