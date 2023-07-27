@@ -3,7 +3,7 @@
     <string name="btnLogin">Login</string>
     <string name="txtInputPassword">Enter password</string>
     <string name="txtInputEmail">Enter e-mail</string>
-    <string name="txtSignup">Don\'t have an account? Sign up</string>
+    <string name="txtSignup">Sign up</string>
     <string name="txtResetPassword">Forgot Password?</string>
     <string name="txtRegister">Register</string>
     <string name="btnLogout">Logout</string>
