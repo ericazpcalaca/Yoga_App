@@ -39,6 +39,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         YogaPose yogaPose = poseList.get(position);
         holder.setImageView(yogaPose.getImage());
         holder.setPoseTitle(yogaPose.getName());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Detail.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", yogaPose.getName());
+                bundle.putString("description", yogaPose.getDescription());
+                bundle.putString("benefits", yogaPose.getBenefits());
+                bundle.putString("url", yogaPose.getImage());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -55,6 +69,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
+            cardView = itemView.findViewById(R.id.card_view);
         }
 
         public void setImageView(String url){
