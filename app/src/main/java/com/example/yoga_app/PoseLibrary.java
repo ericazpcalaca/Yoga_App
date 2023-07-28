@@ -13,9 +13,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,10 +52,10 @@ public class PoseLibrary extends AppCompatActivity {
 
         requestQueue = VolleySingleton.getInstance(this).getRequestQueue();
         poseList = new ArrayList<>();
-        fetchMovie();
+        fetchYogaPose();
     }
 
-    private void fetchMovie() {
+    private void fetchYogaPose() {
         String url = "https://yoga-api-nzy4.onrender.com/v1/poses";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
@@ -87,7 +85,5 @@ public class PoseLibrary extends AppCompatActivity {
                     }
                 });
         requestQueue.add(jsonArrayRequest);
-        //Check dialog fragment
-
     }
 }

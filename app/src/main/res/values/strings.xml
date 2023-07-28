@@ -20,4 +20,5 @@
     <string name="txtPoseL">Pose Library</string>
     <string name="txtFocus">Focus</string>
     <string name="btnSuggest">Suggest a feature</string>
+    <string name="imgPose">Pose image</string>
 </resources>
