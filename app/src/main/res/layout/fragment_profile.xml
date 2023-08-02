@@ -24,17 +24,19 @@
         android:text="@string/txtProfile"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/imgUser"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="@+id/imgUser"
         app:layout_constraintTop_toBottomOf="@+id/imgUser" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/userEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Hello World!"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtProfile" />
@@ -43,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/userEmail">
 
         <Button
             android:id="@+id/btnAccount"
@@ -57,6 +59,7 @@
             android:drawableEnd="@drawable/ic_baseline_settings_24"
             android:drawablePadding="30dp"
             android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:text="@string/btnAccount"
             android:textAlignment="viewStart"
             android:textColor="#000000" />
@@ -66,11 +69,12 @@
             android:layout_height="60dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/btn_background_profile"
             android:drawableEnd="@drawable/ic_baseline_notifications_none_24"
             android:drawablePadding="30dp"
+            android:paddingEnd="20dp"
             android:paddingStart="20dp"
             android:text="@string/txtReminder"
             android:textAlignment="viewStart"
@@ -82,11 +86,12 @@
             android:layout_height="60dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/btn_background_profile"
             android:drawableEnd="@drawable/ic_baseline_logout_24"
             android:drawablePadding="30dp"
+            android:paddingEnd="20dp"
             android:paddingStart="20dp"
             android:text="@string/btnLogout"
             android:textAlignment="viewStart"

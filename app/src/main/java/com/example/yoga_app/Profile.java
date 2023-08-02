@@ -28,7 +28,7 @@ public class Profile extends Fragment {
 
         auth = FirebaseAuth.getInstance();
         btnLogout = view.findViewById(R.id.btnLogout);
-        textView = view.findViewById(R.id.textView);
+        textView = view.findViewById(R.id.userEmail);
         user = auth.getCurrentUser();
 
         if (user == null) {
