@@ -47,7 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="161dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/yogalibrary" />
 
         <TextView
             android:id="@+id/txtFocus"

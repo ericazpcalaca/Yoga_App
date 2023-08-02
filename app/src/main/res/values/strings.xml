@@ -21,4 +21,6 @@
     <string name="txtFocus">Focus</string>
     <string name="btnSuggest">Suggest a feature</string>
     <string name="imgPose">Pose image</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="start_text">Please enter your details to sign in.</string>
 </resources>
