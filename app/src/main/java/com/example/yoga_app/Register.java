@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Register extends AppCompatActivity {
 
     private TextView btnRegister;
+    private TextView btnSignIn;
     private EditText textEmail;
     private EditText textPassword;
     private FirebaseAuth mAuth;
@@ -32,7 +33,9 @@ public class Register extends AppCompatActivity {
         textEmail = findViewById(R.id.inputEmail);
         textPassword = findViewById(R.id.inputPassword);
         btnRegister = findViewById(R.id.btnRegister);
+        btnSignIn = findViewById(R.id.backToSignIn);
         toolbar = findViewById(R.id.toolbarRegister);
+
 
         //Set a back to main page button on top
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_24);
@@ -43,6 +46,13 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        //Go back in case the user already has an account
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         //Register the user using firebase
         btnRegister.setOnClickListener(new View.OnClickListener() {
