@@ -10,10 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import java.util.Calendar;
 
 
 public class Home extends Fragment {
     private ImageButton btnPoseLibrary;
+    private TextView greetingText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,11 +33,28 @@ public class Home extends Fragment {
             }
         });
 
+        greetingText = view.findViewById(R.id.txtTitle);
+        String greeting = getGreetingMessage();
+        greetingText.setText(greeting);
+
         return view;
     }
 
     private void openPoseLibrary() {
         Intent intent = new Intent(getActivity(), PoseLibrary.class);
         startActivity(intent);
+    }
+
+    private String getGreetingMessage() {
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+
+        if (hour >= 0 && hour < 12) {
+            return "Good Morning";
+        } else if (hour >= 12 && hour < 17) {
+            return "Good Afternoon";
+        } else {
+            return "Good Evening";
+        }
     }
 }
