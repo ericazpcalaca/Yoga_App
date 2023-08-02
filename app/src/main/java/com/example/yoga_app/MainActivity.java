@@ -7,9 +7,12 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -19,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private String appTitle = "Zen Flow Yoga";
+    private FirebaseAuth auth;
     private FirebaseUser user;
     private androidx.appcompat.widget.Toolbar toolbar;
     private DrawerLayout drawer;
@@ -48,6 +52,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             toolbar.setTitle(appTitle);
         }
 
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.navEmail);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
+        if(user == null){
+            startActivity(new Intent(getApplicationContext(),Login.class));
+            finish();
+        }else{
+            navUsername.setText(user.getEmail());
+        }
     }
 
     @Override

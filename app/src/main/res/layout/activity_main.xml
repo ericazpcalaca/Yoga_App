@@ -19,7 +19,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/green_one"
+            android:background="@color/teal_200"
             android:id="@+id/toolbar"
             app:popupTheme="@style/Theme.AppCompat.Light"
             android:elevation="4dp"/>
@@ -27,13 +27,15 @@
         <FrameLayout
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@color/teal_100"/>
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/teal_700"
         android:id="@+id/nav_view"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu"/>
