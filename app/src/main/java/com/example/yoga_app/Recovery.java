@@ -47,27 +47,32 @@ public class Recovery extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = txtEmail.getText().toString();
-                mAuth.sendPasswordResetEmail(email)
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                // Password reset email sent successfully
-                                // Display a success message to the user or redirect to another screen
-                                Toast.makeText(Recovery.this,"Email sent",Toast.LENGTH_SHORT).show();
-                            } else {
-                                try {
-                                    throw task.getException();
-                                } catch (FirebaseAuthInvalidUserException e) {
-                                    // User does not exist
-                                    Toast.makeText(Recovery.this,"User doesn't exist",Toast.LENGTH_SHORT).show();
-                                } catch (FirebaseAuthActionCodeException e) {
-                                    // Invalid action code
-                                } catch (FirebaseAuthRecentLoginRequiredException e) {
-                                    // Recent login required
-                                } catch (Exception e) {
-                                    // Other errors
+                if(email.isEmpty()){
+                    Toast.makeText(Recovery.this,"Please, inform the e-mail",Toast.LENGTH_SHORT).show();
+                } else{
+                    mAuth.sendPasswordResetEmail(email)
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    // Password reset email sent successfully
+                                    // Display a success message to the user or redirect to another screen
+                                    Toast.makeText(Recovery.this,"Email sent",Toast.LENGTH_SHORT).show();
+                                } else {
+                                    try {
+                                        throw task.getException();
+                                    } catch (FirebaseAuthInvalidUserException e) {
+                                        // User does not exist
+                                        Toast.makeText(Recovery.this,"User doesn't exist",Toast.LENGTH_SHORT).show();
+                                    } catch (FirebaseAuthActionCodeException e) {
+                                        // Invalid action code
+                                    } catch (FirebaseAuthRecentLoginRequiredException e) {
+                                        // Recent login required
+                                    } catch (Exception e) {
+                                        // Other errors
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
+
             }
         });
     }
