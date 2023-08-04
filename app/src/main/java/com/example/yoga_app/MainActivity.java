@@ -100,10 +100,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 toolbar.setTitle("Profile");
                 break;
             case R.id.nav_share:
-                Toast.makeText(this,"Share",Toast.LENGTH_SHORT).show();
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.setType("text/plain");
+                sendIntent.putExtra(Intent.EXTRA_TEXT,"Join me on a journey to inner peace and wellness with the amazing Zen Flow Yoga! \n\n https://play.google.com/store/apps/" + getPackageName());
+                startActivity(Intent.createChooser(sendIntent,"Choose one"));
                 break;
-            case R.id.nav_send:
-                Toast.makeText(this,"Send",Toast.LENGTH_SHORT).show();
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MainActivity.this, Login.class));
+                finish();
                 break;
         }
         return true;
