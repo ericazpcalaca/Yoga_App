@@ -1,11 +1,14 @@
 package com.example.yoga_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,10 @@ public class SelectedWorkout extends AppCompatActivity {
     private RequestQueue requestQueue;
     private androidx.appcompat.widget.Toolbar toolbar;
 
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +58,29 @@ public class SelectedWorkout extends AppCompatActivity {
         Intent intent = getIntent();
         typeofWorkout = intent.getIntExtra("type", -1);
 
+        recyclerView = findViewById(R.id.posesWorkoutRecycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         requestQueue = VolleySingleton.getInstance(this).getRequestQueue();
+        poseList = new ArrayList<>();
+        tryout();
         fetchYogaWorkout(typeofWorkout);
 
+        adapter = new RecyclerAdapterSimpleList(SelectedWorkout.this, poseList);
+        recyclerView.setAdapter(adapter);
 
-        poseList = new ArrayList<>();
+
+    }
+
+    private void tryout() {
+        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
+        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
+        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
+        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
+        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
+        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
+        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
+        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
 
     }
 
@@ -68,7 +93,17 @@ public class SelectedWorkout extends AppCompatActivity {
                         JSONObject jsonObject = response.getJSONObject(poseNumber);
                         String categoryName = jsonObject.getString("category_name");
                         String categoryDescription = jsonObject.getString("category_description");
-                        
+
+//                        JSONObject jsonPosesList = jsonObject.getJSONObject("poses");
+//                        for(int j = 0; j < jsonPosesList.length(); j++){
+//                            String poseName = jsonPosesList.getString("english_name");
+//                            String poseDescription = jsonPosesList.getString("pose_description");
+//                            String poseBenefits = jsonPosesList.getString("pose_benefits");
+//                            String urlImage = jsonPosesList.getString("url_png");
+//                            YogaPose yogaPose = new YogaPose(poseName, poseDescription, poseBenefits, urlImage);
+//                            poseList.add(yogaPose);
+//                        }
+
                         workOutTitle.setText(categoryName);
                         workOutDesc.setText(categoryDescription);
 
