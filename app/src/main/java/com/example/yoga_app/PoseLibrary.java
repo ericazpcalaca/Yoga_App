@@ -38,7 +38,7 @@ public class PoseLibrary extends AppCompatActivity {
 
         //Set a back to main page button on top
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_24);
-        toolbar.setTitle("All Workout");
+        toolbar.setTitle("Poses");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

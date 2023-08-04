@@ -19,7 +19,12 @@ import java.util.Calendar;
 
 public class Home extends Fragment {
     private ImageButton btnPoseLibrary;
-    private Button btnSugestFeature;
+    private ImageButton btnFocusOne;
+    private ImageButton btnFocusTwo;
+    private ImageButton btnFocusThree;
+    private ImageButton btnFocusFour;
+    private ImageButton btnFocusAll;
+    private Button btnSuggestFeature;
     private TextView greetingText;
 
     @Override
@@ -37,14 +42,45 @@ public class Home extends Fragment {
         btnPoseLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle button click event
                 openPoseLibrary();
             }
         });
 
+        btnFocusOne = view.findViewById(R.id.focusOne);
+        btnFocusOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFocus(0);
+            }
+        });
+
+        btnFocusTwo = view.findViewById(R.id.focusTwo);
+        btnFocusTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFocus(1);
+            }
+        });
+
+        btnFocusThree = view.findViewById(R.id.focusThree);
+        btnFocusThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFocus(2);
+            }
+        });
+
+        btnFocusFour = view.findViewById(R.id.focusFour);
+        btnFocusFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFocus(3);
+            }
+        });
+
         //Send an email suggesting features for the app
-        btnSugestFeature = view.findViewById(R.id.btnSugest);
-        btnSugestFeature.setOnClickListener(new View.OnClickListener() {
+        btnSuggestFeature = view.findViewById(R.id.btnSugest);
+        btnSuggestFeature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //This email is here for test proposes
@@ -68,6 +104,12 @@ public class Home extends Fragment {
 
     private void openPoseLibrary() {
         Intent intent = new Intent(getActivity(), PoseLibrary.class);
+        startActivity(intent);
+    }
+
+    private void openFocus(int focusType) {
+        Intent intent = new Intent(getActivity(), SelectedWorkout.class);
+        intent.putExtra("type",focusType);
         startActivity(intent);
     }
 

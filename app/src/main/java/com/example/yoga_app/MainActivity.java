@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.navEmail);
+        TextView navUsername = headerView.findViewById(R.id.navEmail);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 

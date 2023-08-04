@@ -23,6 +23,7 @@ public class Detail extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         toolbar = findViewById(R.id.toolbarDetail);
+
         //Set a back to main page button on top
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_24);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -46,8 +47,9 @@ public class Detail extends AppCompatActivity {
 
         Glide.with(getApplicationContext()).load(yUrl).into(imagePose);
         poseName.setText(yName);
-        poseDescription.setText(yDescription);
-        String outputString = yBenefits.replace(".", ".\n");
-        poseBenefits.setText("  " + outputString);
+        String outputDescription = yDescription.replace(".", ".\n");
+        poseDescription.setText("  " + outputDescription);
+        String outputBenefits= yBenefits.replace(".", ".\n");
+        poseBenefits.setText("  " + outputBenefits);
     }
 }

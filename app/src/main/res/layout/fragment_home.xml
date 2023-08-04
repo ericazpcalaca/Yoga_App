@@ -78,12 +78,14 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/focusOne"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_launcher_background" />
 
             <ImageButton
+                android:id="@+id/focusTwo"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_weight="1"
@@ -97,12 +99,14 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/focusThree"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_launcher_background" />
 
             <ImageButton
+                android:id="@+id/focusFour"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_weight="1"
