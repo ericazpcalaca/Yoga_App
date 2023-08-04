@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,12 +27,23 @@ public class SelectedWorkout extends AppCompatActivity {
     private TextView workOutDesc;
     private ArrayList<YogaPose> poseList;
     private RequestQueue requestQueue;
+    private androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_workout);
 
+        toolbar = findViewById(R.id.toolbarSelectedWorkout);
+
+        //Set a back to main page button on top
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_24);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         workOutTitle = findViewById(R.id.workOutTitle);
         workOutDesc = findViewById(R.id.txtDescWorkout);
@@ -56,7 +68,7 @@ public class SelectedWorkout extends AppCompatActivity {
                         JSONObject jsonObject = response.getJSONObject(poseNumber);
                         String categoryName = jsonObject.getString("category_name");
                         String categoryDescription = jsonObject.getString("category_description");
-
+                        
                         workOutTitle.setText(categoryName);
                         workOutDesc.setText(categoryDescription);
 

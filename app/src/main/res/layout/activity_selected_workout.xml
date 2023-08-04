@@ -8,7 +8,7 @@
     tools:context=".SelectedWorkout">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarDetail"
+        android:id="@+id/toolbarSelectedWorkout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/teal_200"
