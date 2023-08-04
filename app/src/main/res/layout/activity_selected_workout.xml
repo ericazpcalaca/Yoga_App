@@ -49,6 +49,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
                 android:textAlignment="center"
                 android:text="TextView"
                 android:textColor="@color/black"
@@ -59,7 +61,9 @@
                 android:id="@+id/txtDescWorkout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:paddingStart="15dp"
+                android:paddingEnd="15dp"
                 android:textColor="@color/gray"
                 android:text="AAA"
                 android:textSize="16dp" />
