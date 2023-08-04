@@ -1,6 +1,7 @@
 package com.example.yoga_app;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,12 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
 
 public class Home extends Fragment {
     private ImageButton btnPoseLibrary;
+    private Button btnSugestFeature;
     private TextView greetingText;
 
     @Override
@@ -24,6 +27,12 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        //Greeting text that changes depending on the time of the day
+        greetingText = view.findViewById(R.id.txtTitle);
+        String greeting = getGreetingMessage();
+        greetingText.setText(greeting);
+
+        //Open the Pose Library
         btnPoseLibrary = view.findViewById(R.id.btnPoseLibrary);
         btnPoseLibrary.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,10 +42,27 @@ public class Home extends Fragment {
             }
         });
 
-        greetingText = view.findViewById(R.id.txtTitle);
-        String greeting = getGreetingMessage();
-        greetingText.setText(greeting);
+        //Send an email suggesting features for the app
+        btnSugestFeature = view.findViewById(R.id.btnSugest);
+        btnSugestFeature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //This email is here for test proposes
+                String subject = "Suggest a feature";
+                String email = "mailto: ericacalacacn@gmail.com" +
+                        "?&subject=" + Uri.encode(subject);
 
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse(email));
+
+                try{
+                    startActivity(Intent.createChooser(intent,"Send Email..."));
+                }catch (Exception e){
+                    Toast.makeText(getContext(),"Exception :" + e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
         return view;
     }
 

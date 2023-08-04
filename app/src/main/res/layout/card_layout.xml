@@ -18,24 +18,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="6dp">
 
         <ImageView
             android:id="@+id/poseImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_launcher_background"
+            />
 
         <TextView
             android:id="@+id/poseTitle"
             android:layout_width="236dp"
             android:layout_height="39dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
+            android:text="Example"
             android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
-            android:textSize="30sp"
+            android:textSize="25sp"
+            android:textColor="@color/black"
             app:layout_constraintLeft_toRightOf="@id/poseImage"
             app:layout_constraintStart_toEndOf="@id/poseImage"
             app:layout_constraintTop_toTopOf="parent"

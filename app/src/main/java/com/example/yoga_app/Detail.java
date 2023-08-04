@@ -47,6 +47,7 @@ public class Detail extends AppCompatActivity {
         Glide.with(getApplicationContext()).load(yUrl).into(imagePose);
         poseName.setText(yName);
         poseDescription.setText(yDescription);
-        poseBenefits.setText(yBenefits);
+        String outputString = yBenefits.replace(".", ".\n");
+        poseBenefits.setText("  " + outputString);
     }
 }
