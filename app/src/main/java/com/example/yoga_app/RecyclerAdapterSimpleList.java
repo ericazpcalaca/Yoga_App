@@ -1,6 +1,8 @@
 package com.example.yoga_app;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,19 +35,19 @@ public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdap
         YogaPose yogaPose = poseList.get(position);
         holder.setPoseTitle(yogaPose.getName());
 
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, Detail.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("name", yogaPose.getName());
-//                bundle.putString("description", yogaPose.getDescription());
-//                bundle.putString("benefits", yogaPose.getBenefits());
-//                bundle.putString("url", yogaPose.getImage());
-//                intent.putExtras(bundle);
-//                context.startActivity(intent);
-//            }
-//        });
+        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Detail.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", yogaPose.getName());
+                bundle.putString("description", yogaPose.getDescription());
+                bundle.putString("benefits", yogaPose.getBenefits());
+                bundle.putString("url", yogaPose.getImage());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -56,10 +58,12 @@ public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdap
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView poseTitle;
         View view;
+        androidx.constraintlayout.widget.ConstraintLayout constraintLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
+            constraintLayout = view.findViewById(R.id.listItem);
         }
 
         public void setPoseTitle(String title){
