@@ -41,7 +41,7 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textAlignment="center"
-                android:text="TextView"
+                android:text="Title of Workout"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -54,7 +54,7 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textColor="@color/gray"
-                android:text="AAA"
+                android:text="Description blablabla"
                 android:textSize="16dp" />
 
             <TextView

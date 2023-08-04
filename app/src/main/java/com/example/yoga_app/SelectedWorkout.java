@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,6 +28,7 @@ public class SelectedWorkout extends AppCompatActivity {
 
     private int typeofWorkout;
     private TextView workOutTitle;
+    private TextView error;
     private TextView workOutDesc;
     private ArrayList<YogaPose> poseList;
     private RequestQueue requestQueue;
@@ -63,24 +65,11 @@ public class SelectedWorkout extends AppCompatActivity {
 
         requestQueue = VolleySingleton.getInstance(this).getRequestQueue();
         poseList = new ArrayList<>();
-        tryout();
         fetchYogaWorkout(typeofWorkout);
 
         adapter = new RecyclerAdapterSimpleList(SelectedWorkout.this, poseList);
         recyclerView.setAdapter(adapter);
 
-
-    }
-
-    private void tryout() {
-        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
-        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
-        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
-        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
-        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
-        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
-        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
-        poseList.add(new YogaPose("Nome","Descricao","Beneficio","Imagem"));
 
     }
 
@@ -94,16 +83,22 @@ public class SelectedWorkout extends AppCompatActivity {
                         String categoryName = jsonObject.getString("category_name");
                         String categoryDescription = jsonObject.getString("category_description");
 
-//                        JSONObject jsonPosesList = jsonObject.getJSONObject("poses");
-//                        for(int j = 0; j < jsonPosesList.length(); j++){
-//                            String poseName = jsonPosesList.getString("english_name");
-//                            String poseDescription = jsonPosesList.getString("pose_description");
-//                            String poseBenefits = jsonPosesList.getString("pose_benefits");
-//                            String urlImage = jsonPosesList.getString("url_png");
-//                            YogaPose yogaPose = new YogaPose(poseName, poseDescription, poseBenefits, urlImage);
-//                            poseList.add(yogaPose);
-//                        }
+                        try {
+                            JSONArray jsonArray = jsonObject.getJSONArray("poses");
 
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObjectPose = jsonArray.getJSONObject(i);
+                                String poseName = jsonObjectPose.getString("english_name");
+                                String poseDescription = jsonObjectPose.getString("pose_description");
+                                String poseBenefits = jsonObjectPose.getString("pose_benefits");
+                                String urlImage = jsonObjectPose.getString("url_png");
+                                YogaPose yogaPose = new YogaPose(poseName, poseDescription, poseBenefits, urlImage);
+                                poseList.add(yogaPose);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         workOutTitle.setText(categoryName);
                         workOutDesc.setText(categoryDescription);
 
