@@ -28,13 +28,10 @@ public class SelectedWorkout extends AppCompatActivity {
 
     private int typeofWorkout;
     private TextView workOutTitle;
-    private TextView error;
     private TextView workOutDesc;
     private ArrayList<YogaPose> poseList;
     private RequestQueue requestQueue;
     private androidx.appcompat.widget.Toolbar toolbar;
-
-
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
@@ -57,6 +54,7 @@ public class SelectedWorkout extends AppCompatActivity {
         workOutTitle = findViewById(R.id.workOutTitle);
         workOutDesc = findViewById(R.id.txtDescWorkout);
 
+        //Get the number of the workout selected by the user
         Intent intent = getIntent();
         typeofWorkout = intent.getIntExtra("type", -1);
 
@@ -69,7 +67,6 @@ public class SelectedWorkout extends AppCompatActivity {
 
         adapter = new RecyclerAdapterSimpleList(SelectedWorkout.this, poseList);
         recyclerView.setAdapter(adapter);
-
 
     }
 
