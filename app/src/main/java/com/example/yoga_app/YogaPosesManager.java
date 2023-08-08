@@ -1,0 +1,36 @@
+package com.example.yoga_app;
+
+import java.util.ArrayList;
+
+public class YogaPosesManager {
+
+    private ArrayList<YogaPose> poseList;
+
+    private static YogaPosesManager instance;
+
+    // Private constructor to prevent instantiation from outside
+    private YogaPosesManager() {
+        poseList = new ArrayList<>();
+    }
+
+    // Static method to get the Singleton instance
+    public static YogaPosesManager getInstance() {
+        if (instance == null) {
+            instance = new YogaPosesManager();
+        }
+        return instance;
+    }
+
+    public void addPose(YogaPose pose){
+        poseList.add(pose);
+    }
+
+    public YogaPose getYogaPoseByIndex(int index){
+        return poseList.get(index);
+    }
+
+    public int getNumberOfPoses(){
+        return poseList.size();
+    }
+}
+

@@ -19,12 +19,10 @@ import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    private ArrayList<YogaPose> poseList;
     private Context context;
 
-    public RecyclerAdapter(Context context, ArrayList<YogaPose> poseList){
+    public RecyclerAdapter(Context context){
         this.context = context;
-        this.poseList = poseList;
     }
 
     @NonNull
@@ -36,7 +34,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
-        YogaPose yogaPose = poseList.get(position);
+        YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(position);
         holder.setImageView(yogaPose.getImage());
         holder.setPoseTitle(yogaPose.getName());
 
@@ -57,7 +55,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return poseList.size();
+        return YogaPosesManager.getInstance().getNumberOfPoses();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

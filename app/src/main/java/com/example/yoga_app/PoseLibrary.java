@@ -26,7 +26,6 @@ public class PoseLibrary extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
 
     private RequestQueue requestQueue;
-    private ArrayList<YogaPose> poseList;
     private androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
@@ -51,8 +50,11 @@ public class PoseLibrary extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         requestQueue = VolleySingleton.getInstance(this).getRequestQueue();
-        poseList = new ArrayList<>();
-        fetchYogaPose();
+        if(YogaPosesManager.getInstance().getNumberOfPoses() == 0){
+            fetchYogaPose();
+        }
+        adapter = new RecyclerAdapter(PoseLibrary.this);
+        recyclerView.setAdapter(adapter);
     }
 
     private void fetchYogaPose() {
@@ -68,14 +70,13 @@ public class PoseLibrary extends AppCompatActivity {
                             String poseBenefits = jsonObject.getString("pose_benefits");
                             String urlImage = jsonObject.getString("url_png");
                             YogaPose yogaPose = new YogaPose(poseName, poseDescription, poseBenefits, urlImage);
-                            poseList.add(yogaPose);
+                            YogaPosesManager.getInstance().addPose(yogaPose);
                         }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    adapter = new RecyclerAdapter(PoseLibrary.this, poseList);
-                    recyclerView.setAdapter(adapter);
+
 
                 }, new Response.ErrorListener() {
                     @Override

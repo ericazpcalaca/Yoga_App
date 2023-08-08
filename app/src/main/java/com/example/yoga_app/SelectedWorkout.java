@@ -74,7 +74,9 @@ public class SelectedWorkout extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+//                Intent intent = new Intent(SelectedWorkout.this, Workout.class);
+//                intent.putParcelableArrayListExtra("yogaWorkouts", poseList);
+//                startActivity(intent);
             }
         });
     }
