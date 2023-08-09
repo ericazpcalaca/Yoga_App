@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class YogaPosesManager {
 
     private ArrayList<YogaPose> poseList;
+    private ArrayList<YogaCategories> categoriesList;
 
     private static YogaPosesManager instance;
 
     // Private constructor to prevent instantiation from outside
     private YogaPosesManager() {
         poseList = new ArrayList<>();
+        categoriesList = new ArrayList<>();
     }
 
     // Static method to get the Singleton instance
@@ -25,8 +27,16 @@ public class YogaPosesManager {
         poseList.add(pose);
     }
 
+    public void addCategories(YogaCategories category){
+        categoriesList.add(category);
+    }
+
     public YogaPose getYogaPoseByIndex(int index){
         return poseList.get(index);
+    }
+
+    public YogaCategories getYogaCategoryByIndex(int index){
+        return categoriesList.get(index);
     }
 
     public int getNumberOfPoses(){

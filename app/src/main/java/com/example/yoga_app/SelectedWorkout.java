@@ -67,6 +67,7 @@ public class SelectedWorkout extends AppCompatActivity {
         poseList = new ArrayList<>();
         fetchYogaWorkout(typeofWorkout);
 
+
         adapter = new RecyclerAdapterSimpleList(SelectedWorkout.this, poseList);
         recyclerView.setAdapter(adapter);
 
@@ -88,27 +89,33 @@ public class SelectedWorkout extends AppCompatActivity {
                 (Request.Method.GET, url, null, response -> {
                     try {
                         JSONObject jsonObject = response.getJSONObject(poseNumber);
+                        int categoryID = jsonObject.getInt("id");
                         String categoryName = jsonObject.getString("category_name");
                         String categoryDescription = jsonObject.getString("category_description");
-
+                        ArrayList<Integer> poseIDList = new ArrayList<>();
                         try {
                             JSONArray jsonArray = jsonObject.getJSONArray("poses");
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObjectPose = jsonArray.getJSONObject(i);
+                                int poseId = jsonObject.getInt("id");
+                                poseIDList.add(poseId);
+
                                 String poseName = jsonObjectPose.getString("english_name");
                                 String poseDescription = jsonObjectPose.getString("pose_description");
                                 String poseBenefits = jsonObjectPose.getString("pose_benefits");
                                 String urlImage = jsonObjectPose.getString("url_png");
-                                YogaPose yogaPose = new YogaPose(poseName, poseDescription, poseBenefits, urlImage);
+                                YogaPose yogaPose = new YogaPose(poseId, poseName, poseDescription, poseBenefits, urlImage);
                                 poseList.add(yogaPose);
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                         workOutTitle.setText(categoryName);
                         workOutDesc.setText(categoryDescription);
+                        YogaCategories yogaCategory = new YogaCategories(categoryID,categoryName,categoryDescription,poseIDList);
+                        YogaPosesManager.getInstance().addCategories(yogaCategory);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
