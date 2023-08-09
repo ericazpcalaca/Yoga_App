@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Yoga_App</string>
+    <string name="app_name">Zen Flow</string>
     <string name="btnLogin">Login</string>
     <string name="txtInputPassword">Enter password</string>
     <string name="txtInputEmail">Enter e-mail</string>
