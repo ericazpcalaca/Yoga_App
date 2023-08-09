@@ -28,10 +28,11 @@ public class Notification extends AppCompatActivity {
             }
         });
 
+        btnNotification = findViewById(R.id.btnSetNotification);
         btnNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
     }
