@@ -18,6 +18,7 @@ public class Profile extends Fragment {
 
     private FirebaseAuth auth;
     private Button btnLogout;
+    private Button btnAccountSettings;
     private Button btnReminder;
     private TextView userEmail;
     private FirebaseUser user;
@@ -30,6 +31,7 @@ public class Profile extends Fragment {
         auth = FirebaseAuth.getInstance();
         btnLogout = view.findViewById(R.id.btnLogout);
         userEmail = view.findViewById(R.id.userEmail);
+        btnAccountSettings = view.findViewById(R.id.btnAccount);
         btnReminder = view.findViewById(R.id.btnReminder);
         user = auth.getCurrentUser();
 
@@ -39,6 +41,14 @@ public class Profile extends Fragment {
         } else {
             userEmail.setText(user.getEmail());
         }
+
+        // Set up the account settings
+        btnAccountSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), AccountSettings.class));
+            }
+        });
 
         // Set up the notification
         btnReminder.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +67,8 @@ public class Profile extends Fragment {
                 getActivity().finish();
             }
         });
+
+
 
 
         return view;

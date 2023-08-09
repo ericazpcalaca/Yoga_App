@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class Notification extends AppCompatActivity {
 
     private androidx.appcompat.widget.Toolbar toolbar;
+    private Button btnNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,14 @@ public class Notification extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        btnNotification = findViewById(R.id.btnSetNotification);
+        btnNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

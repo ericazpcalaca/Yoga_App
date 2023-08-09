@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccountSettings">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarAccountSettings"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/teal_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/teal_100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Age"
+            android:textSize="20dp"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/userAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="31"
+            android:drawableEnd="@drawable/ic_baseline_edit_24"
+            android:layout_marginStart="20dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:layout_marginEnd="20dp"
+            android:minHeight="40dp"
+            android:background="@drawable/custom_field" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Current weight"
+            android:textSize="20dp"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/userCurrentWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="70"
+            android:drawableEnd="@drawable/ic_baseline_edit_24"
+            android:layout_marginStart="20dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:layout_marginEnd="20dp"
+            android:minHeight="40dp"
+            android:background="@drawable/custom_field" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Target weight"
+            android:textSize="20dp"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/userTargetWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="31"
+            android:drawableEnd="@drawable/ic_baseline_edit_24"
+            android:layout_marginStart="20dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:layout_marginEnd="20dp"
+            android:minHeight="40dp"
+            android:background="@drawable/custom_field" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Height"
+            android:textSize="20dp"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/userHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="31"
+            android:drawableEnd="@drawable/ic_baseline_edit_24"
+            android:layout_marginStart="20dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:layout_marginEnd="20dp"
+            android:minHeight="40dp"
+            android:background="@drawable/custom_field" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Gender"
+            android:textSize="20dp"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/userGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="31"
+            android:drawableEnd="@drawable/ic_baseline_edit_24"
+            android:layout_marginStart="20dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:layout_marginEnd="20dp"
+            android:minHeight="40dp"
+            android:background="@drawable/custom_field" />
+
+        <Button
+            android:id="@+id/saveData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="50dp"
+            android:text="Save Data"
+            android:background="@drawable/custom_buttom"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
