@@ -15,6 +15,13 @@
         android:theme="@style/Theme.Yoga_App"
         tools:targetApi="31">
         <activity
+            android:name=".AccountSettings"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Notification"
             android:exported="false">
             <meta-data
