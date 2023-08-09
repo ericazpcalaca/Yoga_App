@@ -9,10 +9,19 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class YogaPose implements Parcelable {
+    private int poseId;
     private String name;
     private String description;
     private String benefits;
     private String image;
+
+    public YogaPose(int poseId, String name, String description, String benefits, String image) {
+        this.poseId = poseId;
+        this.name = name;
+        this.description = description;
+        this.benefits = benefits;
+        this.image = image;
+    }
 
     public YogaPose(String name, String description, String benefits, String image) {
         this.name = name;
@@ -39,6 +48,10 @@ public class YogaPose implements Parcelable {
             return new YogaPose[size];
         }
     };
+
+    public int getPoseId() {
+        return poseId;
+    }
 
     public String getName() {
         return name;

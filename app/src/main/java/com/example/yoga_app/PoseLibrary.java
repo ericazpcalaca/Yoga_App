@@ -65,11 +65,12 @@ public class PoseLibrary extends AppCompatActivity {
                     try {
                         for(int i = 0; i < response.length(); i++){
                             JSONObject jsonObject = response.getJSONObject(i);
+                            int poseId = jsonObject.getInt("id");
                             String poseName = jsonObject.getString("english_name");
                             String poseDescription = jsonObject.getString("pose_description");
                             String poseBenefits = jsonObject.getString("pose_benefits");
                             String urlImage = jsonObject.getString("url_png");
-                            YogaPose yogaPose = new YogaPose(poseName, poseDescription, poseBenefits, urlImage);
+                            YogaPose yogaPose = new YogaPose(poseId, poseName, poseDescription, poseBenefits, urlImage);
                             YogaPosesManager.getInstance().addPose(yogaPose);
                         }
 
