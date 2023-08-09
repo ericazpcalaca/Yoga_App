@@ -134,6 +134,17 @@
             android:layout_marginEnd="20dp"
             android:minHeight="40dp"
             android:background="@drawable/custom_field" />
+
+        <Button
+            android:id="@+id/saveData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="50dp"
+            android:text="Save Data"
+            android:background="@drawable/custom_buttom"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
