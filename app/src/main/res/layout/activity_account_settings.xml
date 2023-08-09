@@ -35,6 +35,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/userAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="31"
@@ -56,6 +57,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/userCurrentWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="70"
@@ -77,6 +79,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/userTargetWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="31"
@@ -98,6 +101,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/userHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="31"
@@ -119,6 +123,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/userGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="31"
