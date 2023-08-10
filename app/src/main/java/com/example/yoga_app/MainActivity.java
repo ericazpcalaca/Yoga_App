@@ -3,16 +3,13 @@ package com.example.yoga_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +22,11 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Home()).commit();
             navigationView.setCheckedItem(R.id.home);
             toolbar.setTitle(appTitle);
@@ -66,17 +66,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
-        if(user == null){
-            startActivity(new Intent(getApplicationContext(),Login.class));
+        if (user == null) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
             finish();
-        }else{
+        } else {
             navUsername.setText(user.getEmail());
         }
 
         // Fill up the poses
         requestQueue = VolleySingleton.getInstance(this).getRequestQueue();
-        if(YogaPosesManager.getInstance().getNumberOfPoses() == 0){
-            fetchYogaPose();
+        if (YogaPosesManager.getInstance().getNumberOfPoses() == 0) {
+            fetchAllYogaPose();
+        }
+
+        //Fill up the categories
+        if (YogaPosesManager.getInstance().getNumberOfCategories() == 0) {
+            fetchAllYogaWorkout();
         }
     }
 
@@ -93,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // it goes to the selected fragment and closes the menu
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new Home()).commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -118,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.setType("text/plain");
-                sendIntent.putExtra(Intent.EXTRA_TEXT,"Join me on a journey to inner peace and wellness with the amazing Zen Flow Yoga! \n\n https://play.google.com/store/apps/" + getPackageName());
-                startActivity(Intent.createChooser(sendIntent,"Choose one"));
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Join me on a journey to inner peace and wellness with the amazing Zen Flow Yoga! \n\n https://play.google.com/store/apps/" + getPackageName());
+                startActivity(Intent.createChooser(sendIntent, "Choose one"));
                 break;
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
@@ -130,13 +135,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void fetchYogaPose() {
+    private void fetchAllYogaPose() {
         String url = "https://yoga-api-nzy4.onrender.com/v1/poses";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, response -> {
                     try {
-                        for(int i = 0; i < response.length(); i++){
+                        for (int i = 0; i < response.length(); i++) {
                             JSONObject jsonObject = response.getJSONObject(i);
                             int poseId = jsonObject.getInt("id");
                             String poseName = jsonObject.getString("english_name");
@@ -145,6 +150,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String urlImage = jsonObject.getString("url_png");
                             YogaPose yogaPose = new YogaPose(poseId, poseName, poseDescription, poseBenefits, urlImage);
                             YogaPosesManager.getInstance().addPose(yogaPose);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //TODO: Handle error
+                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(jsonArrayRequest);
+    }
+
+    private void fetchAllYogaWorkout() {
+        String url = "https://yoga-api-nzy4.onrender.com/v1/categories";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
+                (Request.Method.GET, url, null, response -> {
+                    try {
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            int categoryID = jsonObject.getInt("id");
+                            String categoryName = jsonObject.getString("category_name");
+                            String categoryDescription = jsonObject.getString("category_description");
+                            ArrayList<Integer> poseIDList = new ArrayList<>();
+                            try {
+                                JSONArray jsonArray = jsonObject.getJSONArray("poses");
+                                int poseId = -1;
+                                for (int j = 0; j < jsonArray.length(); j++) {
+                                    JSONObject jsonObjectPose = jsonArray.getJSONObject(j);
+                                    poseId = jsonObjectPose.getInt("id");
+                                    poseIDList.add(poseId);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            YogaCategories yogaCategory = new YogaCategories(categoryID, categoryName, categoryDescription, poseIDList);
+                            YogaPosesManager.getInstance().addCategories(yogaCategory);
                         }
 
                     } catch (JSONException e) {

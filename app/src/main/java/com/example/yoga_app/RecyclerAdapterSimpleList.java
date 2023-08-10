@@ -15,12 +15,12 @@ import java.util.ArrayList;
 
 public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdapterSimpleList.ViewHolder> {
 
-    private ArrayList<YogaPose> poseList;
+    private ArrayList<Integer> poseListID;
     private Context context;
 
-    public RecyclerAdapterSimpleList(Context context, ArrayList<YogaPose> poseList){
+    public RecyclerAdapterSimpleList(Context context, ArrayList<Integer> poseListID){
         this.context = context;
-        this.poseList = poseList;
+        this.poseListID = poseListID;
     }
 
     @NonNull
@@ -32,7 +32,7 @@ public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdap
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapterSimpleList.ViewHolder holder, int position) {
-        YogaPose yogaPose = poseList.get(position);
+        YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(poseListID.get(position));
         holder.setPoseTitle(yogaPose.getName());
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +52,7 @@ public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdap
 
     @Override
     public int getItemCount() {
-        return poseList.size();
+        return poseListID.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

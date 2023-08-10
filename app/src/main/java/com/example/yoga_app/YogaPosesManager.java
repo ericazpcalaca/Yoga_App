@@ -39,8 +39,15 @@ public class YogaPosesManager {
         return categoriesList.get(index);
     }
 
+    public ArrayList<Integer> getPoseList(int index){
+        return categoriesList.get(index).getPosesID();
+    }
     public int getNumberOfPoses(){
         return poseList.size();
+    }
+
+    public int getNumberOfCategories(){
+        return categoriesList.size();
     }
 }
 

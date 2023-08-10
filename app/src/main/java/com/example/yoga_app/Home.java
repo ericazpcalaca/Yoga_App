@@ -50,7 +50,7 @@ public class Home extends Fragment {
         btnFocusOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFocus(0);
+                openFocus(1);
             }
         });
 
@@ -58,7 +58,7 @@ public class Home extends Fragment {
         btnFocusTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFocus(1);
+                openFocus(2);
             }
         });
 
@@ -66,7 +66,7 @@ public class Home extends Fragment {
         btnFocusThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFocus(2);
+                openFocus(3);
             }
         });
 
@@ -74,7 +74,7 @@ public class Home extends Fragment {
         btnFocusFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFocus(3);
+                openFocus(4);
             }
         });
 
@@ -125,4 +125,5 @@ public class Home extends Fragment {
             return "Good Evening";
         }
     }
+
 }

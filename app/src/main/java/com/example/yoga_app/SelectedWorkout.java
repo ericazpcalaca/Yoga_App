@@ -31,7 +31,7 @@ public class SelectedWorkout extends AppCompatActivity {
     private Button btnStart;
     private TextView workOutTitle;
     private TextView workOutDesc;
-    private ArrayList<YogaPose> poseList;
+//    private ArrayList<YogaPose> poseList;
     private RequestQueue requestQueue;
     private androidx.appcompat.widget.Toolbar toolbar;
     private RecyclerView recyclerView;
@@ -43,7 +43,6 @@ public class SelectedWorkout extends AppCompatActivity {
         setContentView(R.layout.activity_selected_workout);
 
         toolbar = findViewById(R.id.toolbarSelectedWorkout);
-
         //Set a back to main page button on top
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_24);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -64,63 +63,58 @@ public class SelectedWorkout extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         requestQueue = VolleySingleton.getInstance(this).getRequestQueue();
-        poseList = new ArrayList<>();
-        fetchYogaWorkout(typeofWorkout);
+        //Check if the categories are filled up
+        if (YogaPosesManager.getInstance().getNumberOfCategories() == 0) {
+            fetchYogaWorkout();
+        }
 
+        YogaCategories yogaCategory = YogaPosesManager.getInstance().getYogaCategoryByIndex(typeofWorkout);
+        workOutTitle.setText(yogaCategory.getNameCategory());
+        workOutDesc.setText(yogaCategory.getDescriptionCategory());
 
-        adapter = new RecyclerAdapterSimpleList(SelectedWorkout.this, poseList);
+        adapter = new RecyclerAdapterSimpleList(SelectedWorkout.this, YogaPosesManager.getInstance().getPoseList(typeofWorkout));
         recyclerView.setAdapter(adapter);
 
         btnStart = findViewById(R.id.btnStart);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(SelectedWorkout.this, Workout.class);
-//                intent.putParcelableArrayListExtra("yogaWorkouts", poseList);
-//                startActivity(intent);
+                Intent intent = new Intent(SelectedWorkout.this, Workout.class);
+                intent.putExtra("workoutID",typeofWorkout);
+                startActivity(intent);
             }
         });
     }
 
-    private void fetchYogaWorkout(int poseNumber) {
+    private void fetchYogaWorkout() {
         String url = "https://yoga-api-nzy4.onrender.com/v1/categories";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, response -> {
                     try {
-                        JSONObject jsonObject = response.getJSONObject(poseNumber);
-                        int categoryID = jsonObject.getInt("id");
-                        String categoryName = jsonObject.getString("category_name");
-                        String categoryDescription = jsonObject.getString("category_description");
-                        ArrayList<Integer> poseIDList = new ArrayList<>();
-                        try {
-                            JSONArray jsonArray = jsonObject.getJSONArray("poses");
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObjectPose = jsonArray.getJSONObject(i);
-                                int poseId = jsonObject.getInt("id");
-                                poseIDList.add(poseId);
-
-                                String poseName = jsonObjectPose.getString("english_name");
-                                String poseDescription = jsonObjectPose.getString("pose_description");
-                                String poseBenefits = jsonObjectPose.getString("pose_benefits");
-                                String urlImage = jsonObjectPose.getString("url_png");
-                                YogaPose yogaPose = new YogaPose(poseId, poseName, poseDescription, poseBenefits, urlImage);
-                                poseList.add(yogaPose);
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            int categoryID = jsonObject.getInt("id");
+                            String categoryName = jsonObject.getString("category_name");
+                            String categoryDescription = jsonObject.getString("category_description");
+                            ArrayList<Integer> poseIDList = new ArrayList<>();
+                            try {
+                                JSONArray jsonArray = jsonObject.getJSONArray("poses");
+                                int poseId = -1;
+                                for (int j = 0; j < jsonArray.length(); j++) {
+                                    JSONObject jsonObjectPose = jsonArray.getJSONObject(j);
+                                    poseId = jsonObjectPose.getInt("id");
+                                    poseIDList.add(poseId);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            YogaCategories yogaCategory = new YogaCategories(categoryID, categoryName, categoryDescription, poseIDList);
+                            YogaPosesManager.getInstance().addCategories(yogaCategory);
                         }
-
-                        workOutTitle.setText(categoryName);
-                        workOutDesc.setText(categoryDescription);
-                        YogaCategories yogaCategory = new YogaCategories(categoryID,categoryName,categoryDescription,poseIDList);
-                        YogaPosesManager.getInstance().addCategories(yogaCategory);
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {

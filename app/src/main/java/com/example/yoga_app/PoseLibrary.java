@@ -78,7 +78,6 @@ public class PoseLibrary extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
