@@ -57,13 +57,44 @@
                 android:text="Description blablabla"
                 android:textSize="16dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time:"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="15dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" minutes"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
                 android:paddingStart="15dp"
-                android:text="Exercises "
+                android:text="@string/txtExercises"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
@@ -84,7 +115,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:background="@drawable/custom_buttom"
-                android:text="Start" />
+                android:text="@string/btnStart" />
 
         </LinearLayout>
     </ScrollView>

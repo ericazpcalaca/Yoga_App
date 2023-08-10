@@ -62,7 +62,6 @@ public class SelectedWorkout extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         DataRetriever dataRetriever = new DataRetriever(this);
-
         YogaCategories yogaCategory = YogaPosesManager.getInstance().getYogaCategoryByIndex(typeofWorkout);
         workOutTitle.setText(yogaCategory.getNameCategory());
         workOutDesc.setText(yogaCategory.getDescriptionCategory());
