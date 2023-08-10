@@ -11,8 +11,11 @@
         android:layout_height="wrap_content">
 
         <ImageButton
+            android:id="@+id/closeDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/ic_baseline_close_24"
             android:background="@android:color/transparent"
             android:layout_alignParentEnd="true"
@@ -27,7 +30,6 @@
         android:textSize="25dp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginTop="20dp"
         android:text="Title"/>
     <TextView
         android:layout_width="match_parent"
@@ -42,6 +44,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/btnClose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Close"

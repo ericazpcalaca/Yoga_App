@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -78,6 +79,23 @@ public class Workout extends AppCompatActivity {
     private void showDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.custom_dialog);
+
+        ImageButton btnClose = dialog.findViewById(R.id.closeDialog);
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        Button btnCloseDialog = dialog.findViewById(R.id.btnClose);
+        btnCloseDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
         dialog.show();
     }
 
