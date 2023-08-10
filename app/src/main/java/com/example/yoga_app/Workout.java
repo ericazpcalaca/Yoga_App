@@ -2,6 +2,7 @@ package com.example.yoga_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class Workout extends AppCompatActivity {
@@ -17,7 +19,9 @@ public class Workout extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 600000;
 
     private TextView mTextViewCountDown;
-    private ImageButton mButtonStartPause;
+    private TextView txtTotal;
+    private ImageButton btnStartPause;
+    private ImageButton btnInfo;
     private Button mButtonReset;
 
     private CountDownTimer mCountDownTimer;
@@ -33,12 +37,16 @@ public class Workout extends AppCompatActivity {
         Intent intent = getIntent();
         int typeofWorkout = intent.getIntExtra("workoutID", -1);
 
-        mTextViewCountDown = findViewById(R.id.text_view_countdown);
+        ArrayList<Integer> workOutIDs = YogaPosesManager.getInstance().getPoseList(typeofWorkout);
+        txtTotal = findViewById(R.id.totalPose);
+        txtTotal.setText(String.valueOf(workOutIDs.size()));
 
-        mButtonStartPause = findViewById(R.id.btnStartPause);
+        //Count down to the workout
+        mTextViewCountDown = findViewById(R.id.text_view_countdown);
+        btnStartPause = findViewById(R.id.btnStartPause);
         mButtonReset = findViewById(R.id.btnReset);
 
-        mButtonStartPause.setOnClickListener(new View.OnClickListener() {
+        btnStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mTimerRunning){
@@ -57,19 +65,33 @@ public class Workout extends AppCompatActivity {
         });
 
         updateCountDownText();
+
+        btnInfo = findViewById(R.id.openInfo);
+        btnInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });
+    }
+
+    private void showDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.custom_dialog);
+        dialog.show();
     }
 
     private void resetTimer() {
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
         updateCountDownText();
         mButtonReset.setVisibility(View.INVISIBLE);
-        mButtonStartPause.setVisibility(View.VISIBLE);
+        btnStartPause.setVisibility(View.VISIBLE);
     }
 
     private void pauseTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;
-        mButtonStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
+        btnStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
         mButtonReset.setVisibility(View.VISIBLE);
     }
 
@@ -84,14 +106,14 @@ public class Workout extends AppCompatActivity {
             @Override
             public void onFinish() {
                 mTimerRunning = false;
-                mButtonStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
-                mButtonStartPause.setVisibility(View.INVISIBLE);
+                btnStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
+                btnStartPause.setVisibility(View.INVISIBLE);
                 mButtonReset.setVisibility(View.VISIBLE);
             }
         }.start();
 
         mTimerRunning = true;
-        mButtonStartPause.setImageResource(R.drawable.ic_baseline_pause_circle_24);
+        btnStartPause.setImageResource(R.drawable.ic_baseline_pause_circle_24);
         mButtonReset.setVisibility(View.INVISIBLE);
     }
 

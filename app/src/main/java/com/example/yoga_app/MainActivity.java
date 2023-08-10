@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //TODO: Handle error
-                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
         requestQueue.add(jsonArrayRequest);
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //TODO: Handle error
-                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
         requestQueue.add(jsonArrayRequest);

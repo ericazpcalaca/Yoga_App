@@ -10,5 +10,6 @@
     <color name="gray">#7E7E7E</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green_one">#4f8b97</color>
+    <color name="green_two">#45B5CC</color>
     <color name="green_light">#aae4c9</color>
 </resources>
