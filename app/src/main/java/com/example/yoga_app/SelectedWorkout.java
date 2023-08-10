@@ -61,11 +61,7 @@ public class SelectedWorkout extends AppCompatActivity {
         recyclerView = findViewById(R.id.posesWorkoutRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        requestQueue = VolleySingleton.getInstance(this).getRequestQueue();
-        //Check if the categories are filled up
-        if (YogaPosesManager.getInstance().getNumberOfCategories() == 0) {
-            fetchYogaWorkout();
-        }
+        DataRetriever dataRetriever = new DataRetriever(this);
 
         YogaCategories yogaCategory = YogaPosesManager.getInstance().getYogaCategoryByIndex(typeofWorkout);
         workOutTitle.setText(yogaCategory.getNameCategory());
@@ -85,42 +81,5 @@ public class SelectedWorkout extends AppCompatActivity {
         });
     }
 
-    private void fetchYogaWorkout() {
-        String url = "https://yoga-api-nzy4.onrender.com/v1/categories";
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
-                (Request.Method.GET, url, null, response -> {
-                    try {
-                        for (int i = 0; i < response.length(); i++) {
-                            JSONObject jsonObject = response.getJSONObject(i);
-                            int categoryID = jsonObject.getInt("id");
-                            String categoryName = jsonObject.getString("category_name");
-                            String categoryDescription = jsonObject.getString("category_description");
-                            ArrayList<Integer> poseIDList = new ArrayList<>();
-                            try {
-                                JSONArray jsonArray = jsonObject.getJSONArray("poses");
-                                int poseId = -1;
-                                for (int j = 0; j < jsonArray.length(); j++) {
-                                    JSONObject jsonObjectPose = jsonArray.getJSONObject(j);
-                                    poseId = jsonObjectPose.getInt("id");
-                                    poseIDList.add(poseId);
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            YogaCategories yogaCategory = new YogaCategories(categoryID, categoryName, categoryDescription, poseIDList);
-                            YogaPosesManager.getInstance().addCategories(yogaCategory);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //TODO: Handle error
-                        Toast.makeText(SelectedWorkout.this, error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-        requestQueue.add(jsonArrayRequest);
-    }
 }

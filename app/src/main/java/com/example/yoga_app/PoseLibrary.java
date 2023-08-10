@@ -49,42 +49,8 @@ public class PoseLibrary extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        requestQueue = VolleySingleton.getInstance(this).getRequestQueue();
-        if(YogaPosesManager.getInstance().getNumberOfPoses() == 0){
-            fetchYogaPose();
-        }
+        DataRetriever dataRetriever = new DataRetriever(this);
         adapter = new RecyclerAdapter(PoseLibrary.this);
         recyclerView.setAdapter(adapter);
-    }
-
-    private void fetchYogaPose() {
-        String url = "https://yoga-api-nzy4.onrender.com/v1/poses";
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
-                (Request.Method.GET, url, null, response -> {
-                    try {
-                        for(int i = 0; i < response.length(); i++){
-                            JSONObject jsonObject = response.getJSONObject(i);
-                            int poseId = jsonObject.getInt("id");
-                            String poseName = jsonObject.getString("english_name");
-                            String poseDescription = jsonObject.getString("pose_description");
-                            String poseBenefits = jsonObject.getString("pose_benefits");
-                            String urlImage = jsonObject.getString("url_png");
-                            YogaPose yogaPose = new YogaPose(poseId, poseName, poseDescription, poseBenefits, urlImage);
-                            YogaPosesManager.getInstance().addPose(yogaPose);
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //TODO: Handle error
-                        Toast.makeText(PoseLibrary.this, error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-        requestQueue.add(jsonArrayRequest);
     }
 }

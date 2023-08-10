@@ -67,6 +67,7 @@ public class Workout extends AppCompatActivity {
 
         updateCountDownText();
 
+        //Open the dialog for the information about the current pose
         btnInfo = findViewById(R.id.openInfo);
         btnInfo.setOnClickListener(new View.OnClickListener() {
             @Override
