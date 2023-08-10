@@ -38,18 +38,17 @@ public class Detail extends AppCompatActivity {
         poseDescription = findViewById(R.id.txtDescription);
         poseBenefits = findViewById(R.id.txtBenefits);
 
+        //Get the pose ID
         Bundle bundle = getIntent().getExtras();
+        int poseId = bundle.getInt("id");
 
-        String yName = bundle.getString("name");
-        String yDescription = bundle.getString("description");
-        String yBenefits = bundle.getString("benefits");
-        String yUrl = bundle.getString("url");
+        YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(poseId);
 
-        Glide.with(getApplicationContext()).load(yUrl).into(imagePose);
-        poseName.setText(yName);
-        String outputDescription = yDescription.replace(".", ".\n");
+        Glide.with(getApplicationContext()).load(yogaPose.getImage()).into(imagePose);
+        poseName.setText(yogaPose.getName());
+        String outputDescription = yogaPose.getDescription().replace(".", ".\n");
         poseDescription.setText("  " + outputDescription);
-        String outputBenefits= yBenefits.replace(".", ".\n");
+        String outputBenefits= yogaPose.getBenefits().replace(".", ".\n");
         poseBenefits.setText("  " + outputBenefits);
     }
 }

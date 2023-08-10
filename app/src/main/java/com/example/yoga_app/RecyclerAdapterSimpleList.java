@@ -40,10 +40,7 @@ public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdap
             public void onClick(View v) {
                 Intent intent = new Intent(context, Detail.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("name", yogaPose.getName());
-                bundle.putString("description", yogaPose.getDescription());
-                bundle.putString("benefits", yogaPose.getBenefits());
-                bundle.putString("url", yogaPose.getImage());
+                bundle.putInt("id",yogaPose.getPoseId());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

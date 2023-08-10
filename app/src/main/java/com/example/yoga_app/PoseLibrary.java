@@ -24,8 +24,6 @@ public class PoseLibrary extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
-
-    private RequestQueue requestQueue;
     private androidx.appcompat.widget.Toolbar toolbar;
 
     @Override

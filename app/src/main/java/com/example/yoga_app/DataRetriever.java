@@ -7,6 +7,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,49 +19,20 @@ public class DataRetriever {
 
     private RequestQueue requestQueue;
 
-    public DataRetriever(Context context){
+    public DataRetriever(Context context) {
         requestQueue = VolleySingleton.getInstance(context).getRequestQueue();
 
         //Retrieve yoga poses
         if (YogaPosesManager.getInstance().getNumberOfPoses() == 0) {
-            fetchAllYogaPose();
+            checkDifficulty("beginner");
+            checkDifficulty("intermediate");
+            checkDifficulty("expert");
         }
 
         //Retrieve yoga categories
         if (YogaPosesManager.getInstance().getNumberOfCategories() == 0) {
             fetchAllYogaWorkout();
         }
-    }
-
-    private void fetchAllYogaPose() {
-        String url = "https://yoga-api-nzy4.onrender.com/v1/poses";
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
-                (Request.Method.GET, url, null, response -> {
-                    try {
-                        for (int i = 0; i < response.length(); i++) {
-                            JSONObject jsonObject = response.getJSONObject(i);
-                            int poseId = jsonObject.getInt("id");
-                            String poseName = jsonObject.getString("english_name");
-                            String poseDescription = jsonObject.getString("pose_description");
-                            String poseBenefits = jsonObject.getString("pose_benefits");
-                            String urlImage = jsonObject.getString("url_png");
-                            YogaPose yogaPose = new YogaPose(poseId, poseName, poseDescription, poseBenefits, urlImage);
-                            YogaPosesManager.getInstance().addPose(yogaPose);
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //TODO: Handle error
-//                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-        requestQueue.add(jsonArrayRequest);
     }
 
     private void fetchAllYogaWorkout() {
@@ -104,30 +76,29 @@ public class DataRetriever {
         requestQueue.add(jsonArrayRequest);
     }
 
-    private void checkDifficulty(String level, int categoryID) {
-        String url = "https://yoga-api-nzy4.onrender.com/v1/poses?level="+ level;
+    private void checkDifficulty(String level) {
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
+        String url = "https://yoga-api-nzy4.onrender.com/v1/poses?level=" + level;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, response -> {
                     try {
-                            JSONObject jsonObject = response.getJSONObject(0);
-                            ArrayList<Integer> poseIDList = new ArrayList<>();
-                            try {
-                                JSONArray jsonArray = jsonObject.getJSONArray("poses");
-                                int poseId = -1;
-                                for (int j = 0; j < jsonArray.length(); j++) {
-                                    JSONObject jsonObjectPose = jsonArray.getJSONObject(j);
-                                    poseId = jsonObjectPose.getInt("id");
-                                    String difficultyLevel = jsonObjectPose.getString("difficulty_level");
-//                                    YogaPose yogaPose
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                        JSONArray jsonArray = response.getJSONArray("poses");
+
+                        for (int j = 0; j < jsonArray.length(); j++) {
+                            JSONObject jsonObjectPose = jsonArray.getJSONObject(j);
+                            int poseId = jsonObjectPose.getInt("id");
+                            String poseName = jsonObjectPose.getString("english_name");
+                            String poseDescription = jsonObjectPose.getString("pose_description");
+                            String poseBenefits = jsonObjectPose.getString("pose_benefits");
+                            String urlImage = jsonObjectPose.getString("url_png");
+                            YogaPose yogaPose = new YogaPose(poseId, poseName, poseDescription, poseBenefits, urlImage, level);
+                            YogaPosesManager.getInstance().addPose(yogaPose);
+                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -135,6 +106,7 @@ public class DataRetriever {
 //                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(jsonObjectRequest);
+
     }
 }
