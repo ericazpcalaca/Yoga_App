@@ -8,24 +8,106 @@
     android:orientation="vertical"
     tools:context=".Workout">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/currentPose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:text="1"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="30dp"
+            android:text="/"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:id="@+id/totalPose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="30dp"
+            android:text="10"
+            android:textSize="20dp"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/yogaPoseExample"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_launcher_background"/>
+
     <TextView
         android:id="@+id/text_view_countdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:layout_marginStart="20dp"
         android:text="00:00"
         android:textSize="60sp"/>
 
-    <Button
-        android:id="@+id/btnStartPause"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start"
-        />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/nameCurrentPose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="20dp"
+            android:textColor="@color/black"
+            android:text="Name of the pose"
+            android:textSize="30dp"
+            />
+        <ImageButton
+            android:id="@+id/openInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_weight="0.3"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/ic_baseline_info_24"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnStartPause"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_play_circle_24"
+            android:text="Start" />
+    </LinearLayout>
+
+
     <Button
         android:id="@+id/btnReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="reset"
         android:visibility="invisible"
         tools:visibility="visible"

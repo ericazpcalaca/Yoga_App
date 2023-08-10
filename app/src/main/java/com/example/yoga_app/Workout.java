@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -16,7 +17,7 @@ public class Workout extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 600000;
 
     private TextView mTextViewCountDown;
-    private Button mButtonStartPause;
+    private ImageButton mButtonStartPause;
     private Button mButtonReset;
 
     private CountDownTimer mCountDownTimer;
@@ -68,7 +69,7 @@ public class Workout extends AppCompatActivity {
     private void pauseTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;
-        mButtonStartPause.setText("Start");
+        mButtonStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
         mButtonReset.setVisibility(View.VISIBLE);
     }
 
@@ -83,14 +84,14 @@ public class Workout extends AppCompatActivity {
             @Override
             public void onFinish() {
                 mTimerRunning = false;
-                mButtonStartPause.setText("Start");
+                mButtonStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
                 mButtonStartPause.setVisibility(View.INVISIBLE);
                 mButtonReset.setVisibility(View.VISIBLE);
             }
         }.start();
 
         mTimerRunning = true;
-        mButtonStartPause.setText("Pause");
+        mButtonStartPause.setImageResource(R.drawable.ic_baseline_pause_circle_24);
         mButtonReset.setVisibility(View.INVISIBLE);
     }
 
