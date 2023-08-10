@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +16,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -26,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser user;
     private androidx.appcompat.widget.Toolbar toolbar;
     private DrawerLayout drawer;
-
+    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +71,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finish();
         }else{
             navUsername.setText(user.getEmail());
+        }
+
+        // Fill up the poses
+        requestQueue = VolleySingleton.getInstance(this).getRequestQueue();
+        if(YogaPosesManager.getInstance().getNumberOfPoses() == 0){
+            fetchYogaPose();
         }
     }
 
@@ -113,5 +128,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         return true;
+    }
+
+    private void fetchYogaPose() {
+        String url = "https://yoga-api-nzy4.onrender.com/v1/poses";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
+                (Request.Method.GET, url, null, response -> {
+                    try {
+                        for(int i = 0; i < response.length(); i++){
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            int poseId = jsonObject.getInt("id");
+                            String poseName = jsonObject.getString("english_name");
+                            String poseDescription = jsonObject.getString("pose_description");
+                            String poseBenefits = jsonObject.getString("pose_benefits");
+                            String urlImage = jsonObject.getString("url_png");
+                            YogaPose yogaPose = new YogaPose(poseId, poseName, poseDescription, poseBenefits, urlImage);
+                            YogaPosesManager.getInstance().addPose(yogaPose);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //TODO: Handle error
+                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(jsonArrayRequest);
     }
 }
