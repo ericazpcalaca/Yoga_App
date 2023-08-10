@@ -11,10 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/teal_200"
+        app:title="Account Settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/black" />
 
     <LinearLayout
         android:layout_width="match_parent"

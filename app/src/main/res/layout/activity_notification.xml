@@ -11,11 +11,11 @@
         android:id="@+id/toolbarReminder"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/green_one"
+        android:background="@color/teal_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/black" />
 
     <ImageView
         android:id="@+id/imageView"
