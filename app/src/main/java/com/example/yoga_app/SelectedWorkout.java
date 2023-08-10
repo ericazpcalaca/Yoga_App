@@ -31,7 +31,6 @@ public class SelectedWorkout extends AppCompatActivity {
     private Button btnStart;
     private TextView workOutTitle;
     private TextView workOutDesc;
-//    private ArrayList<YogaPose> poseList;
     private RequestQueue requestQueue;
     private androidx.appcompat.widget.Toolbar toolbar;
     private RecyclerView recyclerView;
