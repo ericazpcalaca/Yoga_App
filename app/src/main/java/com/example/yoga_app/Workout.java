@@ -4,13 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -19,13 +21,18 @@ public class Workout extends AppCompatActivity {
 
     private static final long START_TIME_IN_MILLIS = 1000;
 
-    private TextView mTextViewCountDown;
-    private TextView txtTotal;
+    private TextView txtTimerDisplay;
+    private TextView txtTotalPoses;
+    private TextView txtCurrentPose;
     private ImageButton btnStartPause;
     private ImageButton btnInfo;
-    private Button mButtonReset;
-
+    private ImageView poseImage;
+    private Button btnResetTime;
+    private int selectedTime;
+    private ArrayList<Integer> workOutIDs;
+    private int currentImageIndex = 0;
     private CountDownTimer mCountDownTimer;
+    private long image_change;
 
     private Boolean mTimerRunning = false;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
@@ -37,18 +44,21 @@ public class Workout extends AppCompatActivity {
 
         Intent intent = getIntent();
         int typeofWorkout = intent.getIntExtra("workoutID", -1);
-        int selectedTime = intent.getIntExtra("selectedTime", -1);
-//        mTimeLeftInMillis = selectedTime * START_TIME_IN_MILLIS;
+        selectedTime = intent.getIntExtra("selectedTime", -1);
 
-        ArrayList<Integer> workOutIDs = YogaPosesManager.getInstance().getPoseList(typeofWorkout);
-        txtTotal = findViewById(R.id.totalPose);
-        txtTotal.setText(String.valueOf(workOutIDs.size()));
-        mTimeLeftInMillis = selectedTime * START_TIME_IN_MILLIS * workOutIDs.size();
+        workOutIDs = YogaPosesManager.getInstance().getPoseList(typeofWorkout);
+        txtTotalPoses = findViewById(R.id.totalPose);
+        txtCurrentPose = findViewById(R.id.currentPose);
+        poseImage = findViewById(R.id.yogaPoseExample);
+        txtTotalPoses.setText(String.valueOf(workOutIDs.size()));
+        mTimeLeftInMillis = selectedTime * START_TIME_IN_MILLIS * workOutIDs.size(); //set the timer
+        image_change = selectedTime * 1000; // transform the seconds in milliseconds
+        changeImage();
 
         //Count down to the workout
-        mTextViewCountDown = findViewById(R.id.text_view_countdown);
+        txtTimerDisplay = findViewById(R.id.text_view_countdown);
         btnStartPause = findViewById(R.id.btnStartPause);
-        mButtonReset = findViewById(R.id.btnReset);
+        btnResetTime = findViewById(R.id.btnReset);
 
         btnStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +71,7 @@ public class Workout extends AppCompatActivity {
             }
         });
 
-        mButtonReset.setOnClickListener(new View.OnClickListener() {
+        btnResetTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resetTimer();
@@ -106,7 +116,7 @@ public class Workout extends AppCompatActivity {
     private void resetTimer() {
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
         updateCountDownText();
-        mButtonReset.setVisibility(View.INVISIBLE);
+        btnResetTime.setVisibility(View.INVISIBLE);
         btnStartPause.setVisibility(View.VISIBLE);
     }
 
@@ -114,15 +124,22 @@ public class Workout extends AppCompatActivity {
         mCountDownTimer.cancel();
         mTimerRunning = false;
         btnStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
-        mButtonReset.setVisibility(View.VISIBLE);
+        btnResetTime.setVisibility(View.VISIBLE);
     }
 
     private void startTimer() {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+            private long lastImageChangeTime = 0;
             @Override
             public void onTick(long millisUntilFinished) {
                 mTimeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
+
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - lastImageChangeTime >= image_change) {
+                    changeImage();
+                    lastImageChangeTime = currentTime;
+                }
             }
 
             @Override
@@ -130,13 +147,19 @@ public class Workout extends AppCompatActivity {
                 mTimerRunning = false;
                 btnStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
                 btnStartPause.setVisibility(View.INVISIBLE);
-                mButtonReset.setVisibility(View.VISIBLE);
+                btnResetTime.setVisibility(View.VISIBLE);
             }
         }.start();
 
         mTimerRunning = true;
         btnStartPause.setImageResource(R.drawable.ic_baseline_pause_circle_24);
-        mButtonReset.setVisibility(View.INVISIBLE);
+        btnResetTime.setVisibility(View.INVISIBLE);
+    }
+
+    private void changeImage() {
+        YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(workOutIDs.get(currentImageIndex));
+        Glide.with(getApplicationContext()).load(yogaPose.getImage()).into(poseImage);
+        currentImageIndex++;
     }
 
     private void updateCountDownText() {
@@ -144,6 +167,6 @@ public class Workout extends AppCompatActivity {
         int seconds = (int) ((mTimeLeftInMillis / 1000) % 60);
 
         String timeLeftFormatted = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
-        mTextViewCountDown.setText(timeLeftFormatted);
+        txtTimerDisplay.setText(timeLeftFormatted);
     }
 }
