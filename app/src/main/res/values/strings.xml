@@ -29,4 +29,6 @@
     <string name="btnClose">Close</string>
     <string name="txtExercises">Exercises</string>
     <string name="btnStart">Start</string>
+    <string name="txtTime">Time:</string>
+    <string name="txtMinutes">minutes</string>
 </resources>

@@ -34,7 +34,7 @@
         android:id="@+id/btnSetNotification"
         android:layout_width="216dp"
         android:layout_height="50dp"
-        android:background="@drawable/custom_buttom"
+        android:background="@drawable/custom_button"
         android:text="Add Reminder"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"

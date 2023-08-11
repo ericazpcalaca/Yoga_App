@@ -144,7 +144,7 @@
             android:layout_marginEnd="50dp"
             android:layout_marginStart="50dp"
             android:text="Save Data"
-            android:background="@drawable/custom_buttom"
+            android:background="@drawable/custom_button"
             android:layout_gravity="center"/>
     </LinearLayout>
 

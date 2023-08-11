@@ -50,7 +50,7 @@
             android:text="@string/btnClose"
             android:layout_marginBottom="20dp"
             android:textColor="@color/black"
-            android:background="@drawable/custom_buttom"
+            android:background="@drawable/custom_button"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
             />

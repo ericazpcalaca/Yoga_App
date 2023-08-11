@@ -120,7 +120,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/custom_buttom"
+            android:background="@drawable/custom_button"
             android:text="@string/btnSuggest" />
     </LinearLayout>
 </ScrollView>
