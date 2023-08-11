@@ -23,7 +23,6 @@ public class Home extends Fragment {
     private ImageButton btnFocusTwo;
     private ImageButton btnFocusThree;
     private ImageButton btnFocusFour;
-    private ImageButton btnFocusAll;
     private Button btnSuggestFeature;
     private TextView greetingText;
 
@@ -36,6 +35,9 @@ public class Home extends Fragment {
         greetingText = view.findViewById(R.id.txtTitle);
         String greeting = getGreetingMessage();
         greetingText.setText(greeting);
+
+        //Retrieve the data
+        DataRetriever dataRetriever = new DataRetriever(getActivity().getBaseContext());
 
         //Open the Pose Library
         btnPoseLibrary = view.findViewById(R.id.btnPoseLibrary);

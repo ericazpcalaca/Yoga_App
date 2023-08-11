@@ -38,6 +38,7 @@ public class Detail extends AppCompatActivity {
         poseDescription = findViewById(R.id.txtDescription);
         poseBenefits = findViewById(R.id.txtBenefits);
 
+
         //Get the pose ID
         Bundle bundle = getIntent().getExtras();
         int poseId = bundle.getInt("id");

@@ -31,16 +31,66 @@
             android:textColor="@color/black"
             android:textSize="34sp" />
 
-        <ImageButton
-            android:id="@+id/imgBanner"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" />
+            android:layout_marginBottom="10dp"
+            android:text="Trending"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_button_two"
+                    android:textColor="@color/green_light"
+                    android:textStyle="bold"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:text="Beginner" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_button_two"
+                    android:textColor="@color/green_light"
+                    android:textStyle="bold"
+                    android:layout_marginStart="25dp"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:text="Beginner" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_button_two"
+                    android:textColor="@color/green_light"
+                    android:textStyle="bold"
+                    android:layout_marginStart="25dp"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:text="Beginner" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_button_two"
+                    android:textColor="@color/green_light"
+                    android:textStyle="bold"
+                    android:layout_marginStart="25dp"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:text="Beginner" />
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <TextView
-            android:id="@+id/txtPose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -65,23 +115,99 @@
             android:textColor="@color/black"
             android:textSize="24sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/btnStartOne"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_one" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="20dp"
+                        android:text="Seated Yoga"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/btnStartTwo"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_two" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="20dp"
+                        android:text="Seated Yoga"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_launcher_background" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/btnStartThree"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_one" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="20dp"
+                        android:text="Seated Yoga"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_launcher_background" />
-
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/btnStartFour"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_one" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="20dp"
+                        android:text="Seated Yoga"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
     </LinearLayout>
 </ScrollView>
