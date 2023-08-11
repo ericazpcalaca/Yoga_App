@@ -5,6 +5,13 @@
     android:orientation="vertical"
     android:background="@color/green_two"
     android:id="@+id/custom">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select the pose time for your workout"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:paddingStart="10sp"/>
     <RadioGroup
         android:id="@+id/radioGroup"
         android:theme="@style/ThemeOverlay.AppCompat.Light"

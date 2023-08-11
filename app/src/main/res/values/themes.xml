@@ -21,6 +21,19 @@
         <!-- Customize attributes as needed -->
         <item name="android:background">@color/green_two</item>
         <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/CustomDialogButton.Positive</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/CustomDialogButton.Negative</item>
         <!-- Add more customization attributes here -->
+    </style>
+
+    <!-- Custom button styles -->
+    <style name="CustomDialogButton.Positive" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/black</item>
+        <!-- Customize other button attributes as needed -->
+    </style>
+
+    <style name="CustomDialogButton.Negative" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/black</item>
+        <!-- Customize other button attributes as needed -->
     </style>
 </resources>
