@@ -8,6 +8,16 @@
     android:orientation="vertical"
     tools:context=".Workout">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarWorkdout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/black" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="300dp"
-        android:src="@drawable/ic_launcher_background"/>
+        android:src="@drawable/img_one"/>
 
     <TextView
         android:id="@+id/text_view_countdown"
@@ -71,7 +81,7 @@
             android:layout_weight="1"
             android:paddingStart="20dp"
             android:textColor="@color/black"
-            android:text="Name of the pose"
+            android:text="Click on play to start"
             android:textSize="30dp"
             />
         <ImageButton
@@ -102,14 +112,4 @@
             android:text="Start" />
     </LinearLayout>
 
-
-    <Button
-        android:id="@+id/btnReset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="reset"
-        android:visibility="invisible"
-        tools:visibility="visible"
-        />
 </LinearLayout>
