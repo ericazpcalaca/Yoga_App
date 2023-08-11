@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Random;
 
 
 public class Home extends Fragment {
@@ -23,6 +24,7 @@ public class Home extends Fragment {
     private ImageButton btnFocusTwo;
     private ImageButton btnFocusThree;
     private ImageButton btnFocusFour;
+    private ImageButton btnQuickWorkout;
     private Button btnSuggestFeature;
     private TextView greetingText;
 
@@ -39,6 +41,22 @@ public class Home extends Fragment {
         //Retrieve the data
         DataRetriever dataRetriever = new DataRetriever(getActivity().getBaseContext());
 
+        //Open the quick workout
+        btnQuickWorkout = view.findViewById(R.id.imgBanner);
+        btnQuickWorkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int fixedTime = 20;
+                int workoutRange = YogaPosesManager.getInstance().getNumberOfCategories();
+                Random random = new Random();
+                int randomNumber = random.nextInt(workoutRange);
+                Intent intent = new Intent(getActivity(), Workout.class);
+                intent.putExtra("workoutID",randomNumber);
+                intent.putExtra("selectedTime",fixedTime);
+                startActivity(intent);
+            }
+        });
+        
         //Open the Pose Library
         btnPoseLibrary = view.findViewById(R.id.btnPoseLibrary);
         btnPoseLibrary.setOnClickListener(new View.OnClickListener() {
