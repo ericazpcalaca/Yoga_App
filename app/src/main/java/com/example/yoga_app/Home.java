@@ -56,7 +56,7 @@ public class Home extends Fragment {
                 startActivity(intent);
             }
         });
-        
+
         //Open the Pose Library
         btnPoseLibrary = view.findViewById(R.id.btnPoseLibrary);
         btnPoseLibrary.setOnClickListener(new View.OnClickListener() {
