@@ -179,7 +179,7 @@
                         android:layout_height="150dp"
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/img_one" />
+                        android:src="@drawable/img_four" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -201,7 +201,7 @@
                         android:layout_height="150dp"
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/img_one" />
+                        android:src="@drawable/img_three" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

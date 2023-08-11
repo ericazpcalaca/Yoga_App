@@ -28,7 +28,6 @@ public class Workout extends AppCompatActivity {
     private ImageButton btnStartPause;
     private ImageButton btnInfo;
     private ImageView poseImage;
-//    private Button btnResetTime;
     private int selectedTime;
     private ArrayList<Integer> workOutIDs;
     private int currentImageIndex = 0;
@@ -116,7 +115,6 @@ public class Workout extends AppCompatActivity {
 
         dialog.show();
     }
-
 
     private void pauseTimer() {
         mCountDownTimer.cancel();
