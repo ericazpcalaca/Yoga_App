@@ -22,6 +22,7 @@ public class Workout extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 1000;
 
     private TextView txtTimerDisplay;
+    private TextView txtPoseName;
     private TextView txtTotalPoses;
     private TextView txtCurrentPose;
     private ImageButton btnStartPause;
@@ -48,12 +49,12 @@ public class Workout extends AppCompatActivity {
 
         workOutIDs = YogaPosesManager.getInstance().getPoseList(typeofWorkout);
         txtTotalPoses = findViewById(R.id.totalPose);
+        txtPoseName = findViewById(R.id.nameCurrentPose);
         txtCurrentPose = findViewById(R.id.currentPose);
         poseImage = findViewById(R.id.yogaPoseExample);
         txtTotalPoses.setText(String.valueOf(workOutIDs.size()));
         mTimeLeftInMillis = selectedTime * START_TIME_IN_MILLIS * workOutIDs.size(); //set the timer
         image_change = selectedTime * 1000; // transform the seconds in milliseconds
-        changeImage();
 
         //Count down to the workout
         txtTimerDisplay = findViewById(R.id.text_view_countdown);
@@ -159,6 +160,8 @@ public class Workout extends AppCompatActivity {
     private void changeImage() {
         YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(workOutIDs.get(currentImageIndex));
         Glide.with(getApplicationContext()).load(yogaPose.getImage()).into(poseImage);
+        txtCurrentPose.setText(String.valueOf(currentImageIndex + 1));
+        txtPoseName.setText(yogaPose.getName());
         currentImageIndex++;
     }
 
