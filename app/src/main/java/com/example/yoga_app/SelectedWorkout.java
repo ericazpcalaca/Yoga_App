@@ -45,6 +45,7 @@ public class SelectedWorkout extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private int totalMin = 0;
     private final int DEFAULT_TIME = 45;
+    private int selectedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +70,11 @@ public class SelectedWorkout extends AppCompatActivity {
         Intent intent = getIntent();
         typeofWorkout = intent.getIntExtra("type", -1);
 
+        //Set up of the recycler view
         recyclerView = findViewById(R.id.posesWorkoutRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //Get the data
         DataRetriever dataRetriever = new DataRetriever(this);
         YogaCategories yogaCategory = YogaPosesManager.getInstance().getYogaCategoryByIndex(typeofWorkout);
         workOutTitle.setText(yogaCategory.getNameCategory());
@@ -80,6 +83,7 @@ public class SelectedWorkout extends AppCompatActivity {
         adapter = new RecyclerAdapterSimpleList(SelectedWorkout.this,YogaPosesManager.getInstance().getPoseList(typeofWorkout));
         recyclerView.setAdapter(adapter);
 
+        selectedTime = DEFAULT_TIME;
         convertTime(DEFAULT_TIME);
 
         btnStart = findViewById(R.id.btnStart);
@@ -88,6 +92,7 @@ public class SelectedWorkout extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectedWorkout.this, Workout.class);
                 intent.putExtra("workoutID",typeofWorkout);
+                intent.putExtra("selectedTime",selectedTime);
                 startActivity(intent);
             }
         });
@@ -157,6 +162,7 @@ public class SelectedWorkout extends AppCompatActivity {
 
     private void convertTime(int time) {
         totalMin = YogaPosesManager.getInstance().getPoseList(typeofWorkout).size() * time;
+        selectedTime = time;
 
         int minutes = totalMin / 60;
         int seconds = totalMin % 60;

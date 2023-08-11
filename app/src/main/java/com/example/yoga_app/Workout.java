@@ -17,7 +17,7 @@ import java.util.Locale;
 
 public class Workout extends AppCompatActivity {
 
-    private static final long START_TIME_IN_MILLIS = 600000;
+    private static final long START_TIME_IN_MILLIS = 1000;
 
     private TextView mTextViewCountDown;
     private TextView txtTotal;
@@ -37,10 +37,13 @@ public class Workout extends AppCompatActivity {
 
         Intent intent = getIntent();
         int typeofWorkout = intent.getIntExtra("workoutID", -1);
+        int selectedTime = intent.getIntExtra("selectedTime", -1);
+//        mTimeLeftInMillis = selectedTime * START_TIME_IN_MILLIS;
 
         ArrayList<Integer> workOutIDs = YogaPosesManager.getInstance().getPoseList(typeofWorkout);
         txtTotal = findViewById(R.id.totalPose);
         txtTotal.setText(String.valueOf(workOutIDs.size()));
+        mTimeLeftInMillis = selectedTime * START_TIME_IN_MILLIS * workOutIDs.size();
 
         //Count down to the workout
         mTextViewCountDown = findViewById(R.id.text_view_countdown);
