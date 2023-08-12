@@ -9,6 +9,10 @@ public class User {
     private int userHeight;
     private String userGender;
 
+    public User() {
+        // Default constructor required for Firebase
+    }
+
     public User(String userEmail, int userAge, double currentWeight, double targetWeight, int userHeight, String userGender) {
         this.userEmail = userEmail;
         this.userAge = userAge;

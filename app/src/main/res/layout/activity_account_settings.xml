@@ -35,16 +35,18 @@
             android:paddingStart="10dp"
             android:textColor="@color/black"/>
 
-        <EditText
+        <Button
             android:id="@+id/userAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="31"
+            android:text="00"
+            android:textSize="20sp"
+            android:textAlignment="textStart"
             android:drawableEnd="@drawable/ic_baseline_edit_24"
             android:layout_marginStart="20dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
             android:layout_marginEnd="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="30dp"
             android:minHeight="40dp"
             android:background="@drawable/custom_field" />
 
