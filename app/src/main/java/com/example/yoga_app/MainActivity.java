@@ -21,6 +21,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,17 +40,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser user;
     private androidx.appcompat.widget.Toolbar toolbar;
     private DrawerLayout drawer;
-    private RequestQueue requestQueue;
+    private FirebaseDatabase database;
+    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Toolbar Main Activity
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(appTitle);
         setSupportActionBar(toolbar);
 
+        //Drawer
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -62,14 +70,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = headerView.findViewById(R.id.navEmail);
+        TextView navUsername = headerView.findViewById(R.id.navEmail); //Email text on the drawer
+
+        //Firabase
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        database = FirebaseDatabase.getInstance();
+        userRef = database.getReference("users");
 
         if (user == null) {
             startActivity(new Intent(getApplicationContext(), Login.class));
             finish();
         } else {
+            checkUser(user.getUid(),user.getEmail());
             navUsername.setText(user.getEmail());
         }
 
@@ -127,4 +140,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
+
+    private void checkUser(String userId, String userEmail) {
+        //Initial data that the user can change later
+        int userAge = 17;
+        double currentWeight = 80;
+        double targetWeight = 78;
+        int userHeight = 170;
+        String userGender = "";
+
+        // Create a User object (replace with your own data structure)
+        User user = new User(userEmail, userAge, currentWeight, targetWeight, userHeight, userGender);
+
+        DatabaseReference specificUserRef = userRef.child(userId);
+        specificUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    // Data doesn't exist at this location, so set the value
+                    specificUserRef.setValue(user);
+                } else {
+                    // Data already exists, do nothing
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle errors here
+            }
+        });
+    }
+
 }

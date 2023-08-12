@@ -70,7 +70,6 @@ public class Profile extends Fragment {
 
 
 
-
         return view;
     }
 }

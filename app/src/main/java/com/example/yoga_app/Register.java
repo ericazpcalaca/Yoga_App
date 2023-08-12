@@ -93,7 +93,7 @@ public class Register extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    savingData(email);
+//                                    savingData(email);
                                     // Sign in success, update UI with the signed-in user's information
                                     Toast.makeText(Register.this, "Account Created",
                                             Toast.LENGTH_SHORT).show();
@@ -110,21 +110,5 @@ public class Register extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void savingData(String userEmail){
-        //Initial data that the user can change later
-        int userAge = 31;
-        double currentWeight = 81;
-        double targetWeight = 79;
-        int userHeight = 190;
-        String userGender = "female";
-
-        // Create a User object (replace with your own data structure)
-        User user = new User(userEmail,userAge,currentWeight,targetWeight,userHeight,userGender);
-
-    // Push the user data to the database
-        String userId = userRef.push().getKey(); // Generate a unique key
-        userRef.child(userId).setValue(user);
     }
 }
