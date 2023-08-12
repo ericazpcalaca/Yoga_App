@@ -27,6 +27,10 @@ public class AccountSettings extends AppCompatActivity {
 
     private androidx.appcompat.widget.Toolbar toolbar;
     private Button btnAge;
+    private Button btnCurWeight;
+    private Button btnTargWeight;
+    private Button btnHeight;
+    private Button btnGender;
     private FirebaseDatabase database;
     private DatabaseReference userRef;
     private FirebaseUser userId;
@@ -54,23 +58,26 @@ public class AccountSettings extends AppCompatActivity {
         });
 
         btnAge = findViewById(R.id.userAge);
-
+        btnCurWeight = findViewById(R.id.userCurrentWeight);
+        btnTargWeight = findViewById(R.id.userTargetWeight);
+        btnHeight = findViewById(R.id.userHeight);
+        btnGender = findViewById(R.id.userGender);
         getDataFromFirebase();
 
 
         btnAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
+                showDialog("Insert your age");
                 getDataFromFirebase();
             }
         });
 
     }
 
-    private void showDialog() {
+    private void showDialog(String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialog);
-        builder.setTitle("Insert your age");
+        builder.setTitle(title);
 
         View dialogView = getLayoutInflater().inflate(R.layout.custom_dialog_field, null);
         builder.setView(dialogView);
@@ -109,6 +116,10 @@ public class AccountSettings extends AppCompatActivity {
                 User user = snapshot.getValue(User.class);
                 if (user != null) {
                     btnAge.setText(String.valueOf(user.getUserAge()));
+                    btnCurWeight.setText(String.valueOf(user.getCurrentWeight()));
+                    btnTargWeight.setText(String.valueOf(user.getTargetWeight()));
+                    btnHeight.setText(String.valueOf(user.getUserHeight()));
+                    btnGender.setText(user.getUserGender());
                 }
             }
 

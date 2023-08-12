@@ -54,21 +54,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Current weight"
+            android:text="Current weight in kg"
             android:textSize="20dp"
             android:paddingStart="10dp"
             android:textColor="@color/black"/>
 
-        <EditText
+        <Button
             android:id="@+id/userCurrentWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="70"
+            android:text="00"
+            android:textSize="20sp"
+            android:textAlignment="textStart"
             android:drawableEnd="@drawable/ic_baseline_edit_24"
             android:layout_marginStart="20dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
             android:layout_marginEnd="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="30dp"
             android:minHeight="40dp"
             android:background="@drawable/custom_field" />
 
@@ -76,45 +78,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Target weight"
+            android:text="Target weight in kg"
             android:textSize="20dp"
             android:paddingStart="10dp"
             android:textColor="@color/black"/>
 
-        <EditText
+        <Button
             android:id="@+id/userTargetWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="31"
+            android:text="00"
+            android:textSize="20sp"
+            android:textAlignment="textStart"
             android:drawableEnd="@drawable/ic_baseline_edit_24"
             android:layout_marginStart="20dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
             android:layout_marginEnd="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="30dp"
             android:minHeight="40dp"
-            android:background="@drawable/custom_field" />
+            android:background="@drawable/custom_field" /> />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Height"
+            android:text="Height in cm"
             android:textSize="20dp"
             android:paddingStart="10dp"
             android:textColor="@color/black"/>
 
-        <EditText
+        <Button
             android:id="@+id/userHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="31"
+            android:text="00"
+            android:textSize="20sp"
+            android:textAlignment="textStart"
             android:drawableEnd="@drawable/ic_baseline_edit_24"
             android:layout_marginStart="20dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
             android:layout_marginEnd="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="30dp"
             android:minHeight="40dp"
-            android:background="@drawable/custom_field" />
+            android:background="@drawable/custom_field" /> />
 
         <TextView
             android:layout_width="match_parent"
@@ -125,29 +131,21 @@
             android:paddingStart="10dp"
             android:textColor="@color/black"/>
 
-        <EditText
+        <Button
             android:id="@+id/userGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="31"
+            android:text="00"
+            android:textSize="20sp"
+            android:textAlignment="textStart"
             android:drawableEnd="@drawable/ic_baseline_edit_24"
             android:layout_marginStart="20dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
             android:layout_marginEnd="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="30dp"
             android:minHeight="40dp"
-            android:background="@drawable/custom_field" />
+            android:background="@drawable/custom_field" /> />
 
-        <Button
-            android:id="@+id/saveData"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginStart="50dp"
-            android:text="Save Data"
-            android:background="@drawable/custom_button"
-            android:layout_gravity="center"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
