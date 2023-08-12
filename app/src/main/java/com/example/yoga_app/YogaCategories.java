@@ -9,12 +9,25 @@ public class YogaCategories {
     private String nameCategory;
     private String descriptionCategory;
     private ArrayList<Integer> posesID;
+    private String levelCategory;
+
+    public YogaCategories(int idCategory, String nameCategory, String descriptionCategory, ArrayList<Integer> posesID, String levelCategory) {
+        this.idCategory = idCategory;
+        this.nameCategory = nameCategory;
+        this.descriptionCategory = descriptionCategory;
+        this.posesID = posesID;
+        this.levelCategory = levelCategory;
+    }
 
     public YogaCategories(int idCategory, String nameCategory, String descriptionCategory, ArrayList<Integer> posesID) {
         this.idCategory = idCategory;
         this.nameCategory = nameCategory;
         this.descriptionCategory = descriptionCategory;
         this.posesID = posesID;
+    }
+
+    public String getLevelCategory() {
+        return levelCategory;
     }
 
     public int getIdCategory() {

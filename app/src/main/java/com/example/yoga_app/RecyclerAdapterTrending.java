@@ -42,10 +42,10 @@ public class RecyclerAdapterTrending extends RecyclerView.Adapter<RecyclerAdapte
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(context, SelectedWorkout.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("id",yogaCategory.getIdCategory());
-                bundle.putInt("selectedTime",FIXED_TIME);
+                bundle.putInt("type",yogaCategory.getIdCategory());
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);

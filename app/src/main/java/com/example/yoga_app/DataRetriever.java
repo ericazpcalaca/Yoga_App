@@ -107,6 +107,39 @@ public class DataRetriever {
                     }
                 });
         requestQueue.add(jsonObjectRequest);
+    }
+
+    private void checkDifficultyLevel(String level) {
+
+        String url = "https://yoga-api-nzy4.onrender.com/v1/poses?level=" + level;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, response -> {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("poses");
+
+                        for (int j = 0; j < jsonArray.length(); j++) {
+                            JSONObject jsonObjectPose = jsonArray.getJSONObject(j);
+                            int poseId = jsonObjectPose.getInt("id");
+                            String poseName = jsonObjectPose.getString("english_name");
+                            String poseDescription = jsonObjectPose.getString("pose_description");
+                            String poseBenefits = jsonObjectPose.getString("pose_benefits");
+                            String urlImage = jsonObjectPose.getString("url_png");
+                            YogaPose yogaPose = new YogaPose(poseId, poseName, poseDescription, poseBenefits, urlImage, level);
+                            YogaPosesManager.getInstance().addPose(yogaPose);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //TODO: Handle error
+//                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(jsonObjectRequest);
 
     }
 }
