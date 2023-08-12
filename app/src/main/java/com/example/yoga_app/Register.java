@@ -11,10 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Register extends AppCompatActivity {
 
@@ -24,6 +27,8 @@ public class Register extends AppCompatActivity {
     private EditText textPassword;
     private FirebaseAuth mAuth;
     private androidx.appcompat.widget.Toolbar toolbar;
+    FirebaseDatabase database;
+    DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,13 @@ public class Register extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         btnSignIn = findViewById(R.id.backToSignIn);
         toolbar = findViewById(R.id.toolbarRegister);
+
+        // Initialize Firebase
+        FirebaseApp.initializeApp(this);
+        // Obtain a reference to the Firebase Realtime Database
+        database = FirebaseDatabase.getInstance();
+        // Create a reference to the "users" node
+        userRef = database.getReference("users");
 
 
         //Set a back to main page button on top
@@ -81,6 +93,7 @@ public class Register extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    savingData(email);
                                     // Sign in success, update UI with the signed-in user's information
                                     Toast.makeText(Register.this, "Account Created",
                                             Toast.LENGTH_SHORT).show();
@@ -97,5 +110,21 @@ public class Register extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void savingData(String userEmail){
+        //Initial data that the user can change later
+        int userAge = 31;
+        double currentWeight = 81;
+        double targetWeight = 79;
+        int userHeight = 190;
+        String userGender = "female";
+
+        // Create a User object (replace with your own data structure)
+        User user = new User(userEmail,userAge,currentWeight,targetWeight,userHeight,userGender);
+
+    // Push the user data to the database
+        String userId = userRef.push().getKey(); // Generate a unique key
+        userRef.child(userId).setValue(user);
     }
 }
