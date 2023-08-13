@@ -31,11 +31,10 @@ public class Workout extends AppCompatActivity {
     private ImageButton btnInfo;
     private ImageView poseImage;
     private int selectedTime;
-    private ArrayList<Integer> workOutIDs;
     private int currentImageIndex = 0;
+    private ArrayList<Integer> workOutIDs;
     private CountDownTimer mCountDownTimer;
     private long image_change;
-
     private Boolean mTimerRunning = false;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
@@ -96,7 +95,7 @@ public class Workout extends AppCompatActivity {
     }
 
     /*
-        Dialog to show the user more informations about the current pose
+        Dialog to show the user more information's about the current pose
     */
     private void showDialog() {
         Dialog dialog = new Dialog(this);
