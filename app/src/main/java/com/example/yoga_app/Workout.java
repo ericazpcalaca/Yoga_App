@@ -75,9 +75,9 @@ public class Workout extends AppCompatActivity {
         btnStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mTimerRunning){
+                if (mTimerRunning) {
                     pauseTimer();
-                }else{
+                } else {
                     startTimer();
                 }
             }
@@ -95,6 +95,9 @@ public class Workout extends AppCompatActivity {
         });
     }
 
+    /*
+        Dialog to show the user more informations about the current pose
+    */
     private void showDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.custom_dialog);
@@ -120,45 +123,12 @@ public class Workout extends AppCompatActivity {
         TextView description = dialog.findViewById(R.id.descriptionOfPose);
         title.setText(yogaPose.getName());
         description.setText(yogaPose.getDescription());
-
-
         dialog.show();
     }
 
-    private void pauseTimer() {
-        mCountDownTimer.cancel();
-        mTimerRunning = false;
-        btnStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
-    }
-
-    private void startTimer() {
-        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
-            private long lastImageChangeTime = 0;
-            @Override
-            public void onTick(long millisUntilFinished) {
-                mTimeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-
-                long currentTime = System.currentTimeMillis();
-                if (currentTime - lastImageChangeTime >= image_change) {
-                    changeImage();
-                    lastImageChangeTime = currentTime;
-                }
-            }
-
-            @Override
-            public void onFinish() {
-                mTimerRunning = false;
-                btnStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
-                btnStartPause.setVisibility(View.INVISIBLE);
-                callDialog();
-            }
-        }.start();
-
-        mTimerRunning = true;
-        btnStartPause.setImageResource(R.drawable.ic_baseline_pause_circle_24);
-    }
-
+    /*
+       Dialog to show at the end of the workout that the user finished the workout
+   */
     private void callDialog() {
         // Inflate the dialog layout
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -181,7 +151,45 @@ public class Workout extends AppCompatActivity {
         });
     }
 
-    private void changeImage() {
+    private void startTimer() {
+        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+            private long lastImageChangeTime = 0;
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mTimeLeftInMillis = millisUntilFinished;
+                updateCountDownText();
+
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - lastImageChangeTime >= image_change) {
+                    updateDataInScreen();
+                    lastImageChangeTime = currentTime;
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                mTimerRunning = false;
+                btnStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
+                btnStartPause.setVisibility(View.INVISIBLE);
+                callDialog();
+            }
+        }.start();
+
+        mTimerRunning = true;
+        btnStartPause.setImageResource(R.drawable.ic_baseline_pause_circle_24);
+    }
+
+    private void pauseTimer() {
+        mCountDownTimer.cancel();
+        mTimerRunning = false;
+        btnStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
+    }
+
+    /*
+       Method to upload the images and names of the poses while the time goes by
+   */
+    private void updateDataInScreen() {
         YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(workOutIDs.get(currentImageIndex));
         Glide.with(getApplicationContext()).load(yogaPose.getImage()).into(poseImage);
         txtCurrentPose.setText(String.valueOf(currentImageIndex + 1));
@@ -193,7 +201,7 @@ public class Workout extends AppCompatActivity {
         int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
         int seconds = (int) ((mTimeLeftInMillis / 1000) % 60);
 
-        String timeLeftFormatted = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
         txtTimerDisplay.setText(timeLeftFormatted);
     }
 }

@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="300dp"
-        android:src="@drawable/img_one"/>
+        android:src="@drawable/start"/>
 
     <TextView
         android:id="@+id/text_view_countdown"

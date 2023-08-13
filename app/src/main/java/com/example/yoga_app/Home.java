@@ -70,7 +70,7 @@ public class Home extends Fragment {
         btnFocusOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFocus(1);
+                openFocus(9);
             }
         });
 
