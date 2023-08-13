@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private FirebaseDatabase database;
     private DatabaseReference userRef;
+    private DatabaseReference userTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         user = auth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("users");
+        userTracker = database.getReference("tracker");
 
         if (user == null) {
             startActivity(new Intent(getApplicationContext(), Login.class));
@@ -100,8 +102,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    // When the user clicks on the item in the menu,
-    // it goes to the selected fragment and closes the menu
+    /*
+     When the user clicks on the item in the menu,
+     it goes to the selected fragment and closes the menu
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -141,24 +145,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /*
+        Check if the user already existed before
+        In case that is the first time log in, it will create his started account
+    */
     private void checkUser(String userId, String userEmail) {
-        //Initial data that the user can change later
-        int userAge = 17;
-        double currentWeight = 80;
-        double targetWeight = 78;
-        int userHeight = 170;
-        String userGender = "";
-
-        // Create a User object (replace with your own data structure)
-        User user = new User(userEmail, userAge, currentWeight, targetWeight, userHeight, userGender);
-
         DatabaseReference specificUserRef = userRef.child(userId);
+        DatabaseReference specificUserRefForTracking = userTracker.child(userId);
+
         specificUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
                     // Data doesn't exist at this location, so set the value
+                    //Initial data that the user can change later
+                    int userAge = 0;
+                    double currentWeight = 00;
+                    double targetWeight = 00;
+                    int userHeight = 00;
+                    String userGender = "Prefer not to say";
+                    // Create a User object
+                    User user = new User(userEmail, userAge, currentWeight, targetWeight, userHeight, userGender);
                     specificUserRef.setValue(user);
+                } else {
+                    // Data already exists, do nothing
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle errors here
+            }
+        });
+
+        specificUserRefForTracking.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    // Data doesn't exist at this location, so set the value
+                    // Create a Progress object
+                    ProgressUser progressUser = new ProgressUser();
+                    specificUserRefForTracking.setValue(progressUser);
                 } else {
                     // Data already exists, do nothing
                 }
