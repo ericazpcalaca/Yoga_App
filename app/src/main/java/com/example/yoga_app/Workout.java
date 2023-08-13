@@ -115,6 +115,13 @@ public class Workout extends AppCompatActivity {
             }
         });
 
+        YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(workOutIDs.get(currentImageIndex - 1));
+        TextView title = dialog.findViewById(R.id.titleOfPose);
+        TextView description = dialog.findViewById(R.id.descriptionOfPose);
+        title.setText(yogaPose.getName());
+        description.setText(yogaPose.getDescription());
+
+
         dialog.show();
     }
 
