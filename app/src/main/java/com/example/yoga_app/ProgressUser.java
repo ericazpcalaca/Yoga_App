@@ -7,7 +7,18 @@ public class ProgressUser {
     private int lastFinishedWorkout;
     private int bestStreak;
 
+
+    private int currentStreak;
+
     public ProgressUser() {
+    }
+
+    public ProgressUser(int totalWorkout, int totalMinutes, int lastFinishedWorkout, int bestStreak, int currentStreak) {
+        this.totalWorkout = totalWorkout;
+        this.totalMinutes = totalMinutes;
+        this.lastFinishedWorkout = lastFinishedWorkout;
+        this.bestStreak = bestStreak;
+        this.currentStreak = currentStreak;
     }
 
     public ProgressUser(int totalWorkout, int totalMinutes, int lastFinishedWorkout, int bestStreak) {
@@ -48,4 +59,13 @@ public class ProgressUser {
     public void setBestStreak(int bestStreak) {
         this.bestStreak = bestStreak;
     }
+
+    public int getCurrentStreak() {
+        return currentStreak;
+    }
+
+    public void setCurrentStreak(int currentStreak) {
+        this.currentStreak = currentStreak;
+    }
+
 }
