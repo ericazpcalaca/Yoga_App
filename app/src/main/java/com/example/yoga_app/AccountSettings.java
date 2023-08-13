@@ -5,16 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -68,16 +65,92 @@ public class AccountSettings extends AppCompatActivity {
         btnAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog("Insert your age");
+                showDialogBtnAge("age");
+                getDataFromFirebase();
+            }
+        });
+
+        btnCurWeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogBtnWeight("current");
+                getDataFromFirebase();
+            }
+        });
+
+        btnTargWeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogBtnWeight("target");
+                getDataFromFirebase();
+
+            }
+        });
+
+        btnHeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogBtnAge("height");
+                getDataFromFirebase();
+            }
+        });
+
+        btnGender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogGender();
                 getDataFromFirebase();
             }
         });
 
     }
 
-    private void showDialog(String title) {
+    private void showDialogGender() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialog);
-        builder.setTitle(title);
+            builder.setTitle("Insert your gender");
+
+        View dialogView = getLayoutInflater().inflate(R.layout.custom_dialog_radiobtn, null);
+        builder.setView(dialogView);
+
+        final RadioGroup radioGroup = dialogView.findViewById(R.id.radioGroupGender);
+
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+
+                switch (selectedRadioButtonId){
+                    case R.id.female:
+                        userRef.child("userGender").setValue("Female");
+                        break;
+                    case R.id.male:
+                        userRef.child("userGender").setValue("Male");
+                        break;
+                    case R.id.noBinary:
+                        userRef.child("userGender").setValue("No-binary");
+                        break;
+                    case R.id.notSay:
+                        userRef.child("userGender").setValue("Prefer not to say");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+        builder.setNegativeButton("Cancel", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    private void showDialogBtnWeight(String userWeight){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialog);
+        if(userWeight.equals("current")){
+            builder.setTitle("Current weight in kg");
+        } else if (userWeight.equals("target")){
+            builder.setTitle("Target weight in kg");
+        }
 
         View dialogView = getLayoutInflater().inflate(R.layout.custom_dialog_field, null);
         builder.setView(dialogView);
@@ -86,11 +159,47 @@ public class AccountSettings extends AppCompatActivity {
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int isAgeANumber = isNumber(updateInfo.getText().toString());
-                if (isAgeANumber >= 0) { // Check if it's a valid number
-                    userRef.child("userAge").setValue(isAgeANumber);
+                double weight = isNumberDouble(updateInfo.getText().toString());
+                if (weight >= 0) { // Check if it's a valid number
+                    if(userWeight.equals("current")){
+                        userRef.child("currentWeight").setValue(weight);
+                    }else if(userWeight.equals("target")){
+                        userRef.child("targetWeight").setValue(weight);
+                    }
+                }else{
+                    Toast.makeText(AccountSettings.this,"Please insert a number",Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
 
+        builder.setNegativeButton("Cancel", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showDialogBtnAge(String type) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialog);
+        if(type.equals("age")){
+            builder.setTitle("Insert your age");
+        } else if(type.equals("height")){
+            builder.setTitle("Insert your height");
+        }
+
+        View dialogView = getLayoutInflater().inflate(R.layout.custom_dialog_field, null);
+        builder.setView(dialogView);
+
+        EditText updateInfo = dialogView.findViewById(R.id.updateInfo);
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int isThisANumber = isNumber(updateInfo.getText().toString());
+                if (isThisANumber >= 0) { // Check if it's a valid number
+                    if(type.equals("age")){
+                        userRef.child("userAge").setValue(isThisANumber);
+                    } else if(type.equals("height")){
+                        userRef.child("userHeight").setValue(isThisANumber);
+                    }
+                }
             }
         });
 
@@ -102,6 +211,15 @@ public class AccountSettings extends AppCompatActivity {
     private int isNumber(String toString) {
         try {
             int number = Integer.parseInt(toString);
+            return number;
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
+    private double isNumberDouble(String toString) {
+        try {
+            double number = Double.parseDouble(toString);
             return number;
         } catch (NumberFormatException e) {
             return -1;
