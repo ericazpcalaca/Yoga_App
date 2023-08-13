@@ -2,10 +2,12 @@ package com.example.yoga_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -142,11 +144,34 @@ public class Workout extends AppCompatActivity {
                 mTimerRunning = false;
                 btnStartPause.setImageResource(R.drawable.ic_baseline_play_circle_24);
                 btnStartPause.setVisibility(View.INVISIBLE);
+                callDialog();
             }
         }.start();
 
         mTimerRunning = true;
         btnStartPause.setImageResource(R.drawable.ic_baseline_pause_circle_24);
+    }
+
+    private void callDialog() {
+        // Inflate the dialog layout
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_finished_workout, null);
+
+        // Create and show the dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+
+        final Dialog dialog = builder.create();
+        dialog.show();
+
+        // Close button click listener
+        View closeButton = dialogView.findViewById(R.id.dialog_button);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 
     private void changeImage() {
