@@ -85,7 +85,7 @@
             android:shadowDx="2"
             android:shadowDy="0"
             android:shadowRadius="2"
-            android:text="Minuts"
+            android:text="Minutes"
             android:textColor="@color/black"
             android:textSize="15sp" />
     </LinearLayout>

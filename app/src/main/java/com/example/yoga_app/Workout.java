@@ -1,5 +1,6 @@
 package com.example.yoga_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -13,8 +14,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -37,17 +46,35 @@ public class Workout extends AppCompatActivity {
     private long image_change;
     private Boolean mTimerRunning = false;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    private FirebaseDatabase database;
+    private DatabaseReference userRef;
+    private FirebaseUser userId;
+    private FirebaseAuth auth;
+    private int updateWorkout;
+    private int updateMinutes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
 
-        Intent intent = getIntent();
-        int typeofWorkout = intent.getIntExtra("workoutID", -1);
-        selectedTime = intent.getIntExtra("selectedTime", -1);
-
+        //Set variables
         toolbar = findViewById(R.id.toolbarWorkdout);
+        txtTotalPoses = findViewById(R.id.totalPose);
+        txtPoseName = findViewById(R.id.nameCurrentPose);
+        txtCurrentPose = findViewById(R.id.currentPose);
+        poseImage = findViewById(R.id.yogaPoseExample);
+        txtTimerDisplay = findViewById(R.id.text_view_countdown);
+        btnStartPause = findViewById(R.id.btnStartPause);
+        btnInfo = findViewById(R.id.openInfo);
+
+        // Initialize Firebase
+        database = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+        userId = auth.getCurrentUser();
+        userRef = database.getReference("tracker").child(userId.getUid());
+
 
         //Set a back to main page button on top
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_24);
@@ -58,19 +85,21 @@ public class Workout extends AppCompatActivity {
             }
         });
 
+        //Get data about the workout selected and the time from the other activity
+        Intent intent = getIntent();
+        int typeofWorkout = intent.getIntExtra("workoutID", -1);
+        selectedTime = intent.getIntExtra("selectedTime", -1);
+
+        /*
+            Get the list of workouts id's and set the timer and the
+            total of poses
+        */
         workOutIDs = YogaPosesManager.getInstance().getPoseList(typeofWorkout);
-        txtTotalPoses = findViewById(R.id.totalPose);
-        txtPoseName = findViewById(R.id.nameCurrentPose);
-        txtCurrentPose = findViewById(R.id.currentPose);
-        poseImage = findViewById(R.id.yogaPoseExample);
         txtTotalPoses.setText(String.valueOf(workOutIDs.size()));
-        mTimeLeftInMillis = selectedTime * START_TIME_IN_MILLIS * workOutIDs.size(); //set the timer
+        mTimeLeftInMillis = selectedTime * START_TIME_IN_MILLIS * workOutIDs.size();
         image_change = selectedTime * 1000; // transform the seconds in milliseconds
 
         //Count down to the workout
-        txtTimerDisplay = findViewById(R.id.text_view_countdown);
-        btnStartPause = findViewById(R.id.btnStartPause);
-
         btnStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +114,6 @@ public class Workout extends AppCompatActivity {
         updateCountDownText();
 
         //Open the dialog for the information about the current pose
-        btnInfo = findViewById(R.id.openInfo);
         btnInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +157,9 @@ public class Workout extends AppCompatActivity {
        Dialog to show at the end of the workout that the user finished the workout
    */
     private void callDialog() {
+
+
+
         // Inflate the dialog layout
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.dialog_finished_workout, null);
@@ -145,6 +176,7 @@ public class Workout extends AppCompatActivity {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateUserProgress();
                 dialog.dismiss();
             }
         });
@@ -203,4 +235,33 @@ public class Workout extends AppCompatActivity {
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
         txtTimerDisplay.setText(timeLeftFormatted);
     }
+
+    /*
+       Method to upload the information about the user in regard of his daily progress
+   */
+    private void updateUserProgress() {
+        // Attach a listener to the "users" node
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ProgressUser userProgress = snapshot.getValue(ProgressUser.class);
+                if (userProgress != null) {
+                    updateWorkout = userProgress.getTotalWorkout();
+                    updateMinutes = userProgress.getTotalMinutes();
+                    updateMinutes += (selectedTime * workOutIDs.size() / 60);
+                    updateWorkout++;
+                    userRef.child("totalWorkout").setValue(updateWorkout);
+                    userRef.child("totalMinutes").setValue(updateMinutes);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
 }
