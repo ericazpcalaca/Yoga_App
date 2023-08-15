@@ -165,8 +165,6 @@ public class Workout extends AppCompatActivity {
    */
     private void callDialog() {
 
-
-
         // Inflate the dialog layout
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.dialog_finished_workout, null);
@@ -185,6 +183,7 @@ public class Workout extends AppCompatActivity {
             public void onClick(View v) {
                 updateUserProgress();
                 dialog.dismiss();
+                finish();
             }
         });
     }
