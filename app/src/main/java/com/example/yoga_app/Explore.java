@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Explore extends Fragment {
 
     private Button btnAll;
@@ -23,6 +26,7 @@ public class Explore extends Fragment {
     private ImageButton btnFocusTwo;
     private ImageButton btnFocusThree;
     private ImageButton btnFocusFour;
+    private ImageButton btnCreatedForYou;
     private final String TYPE_ALL = "all";
     private final String TYPE_STRENGTH = "strength";
     private final String TYPE_INTERMEDIATE = "intermediate";
@@ -80,7 +84,17 @@ public class Explore extends Fragment {
         });
 
         //Created for you
-        
+        btnCreatedForYou = view.findViewById(R.id.btnCreatedForYou);
+        btnCreatedForYou.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int idOfCreation = createForYou();
+                Intent intent = new Intent(getActivity(), SelectedWorkout.class);
+                intent.putExtra("type",idOfCreation);
+                startActivity(intent);
+            }
+        });
+
         //Getting Started
         //Seated Yoga
         btnFocusOne = view.findViewById(R.id.btnStartOne);
@@ -119,6 +133,22 @@ public class Explore extends Fragment {
         });
 
         return view;
+    }
+
+    private int createForYou() {
+        int sizePoses = YogaPosesManager.getInstance().getNumberOfPoses();
+        int sizeCategory = YogaPosesManager.getInstance().getNumberOfCategories();
+        ArrayList<Integer> poseIDList = new ArrayList<>();
+
+        Random random = new Random();
+        for (int i = 0; i < 10; i++){
+            int randomNumber = random.nextInt(sizePoses) + 1;
+            poseIDList.add(randomNumber);
+        }
+
+        YogaCategories yogaCategory = new YogaCategories(sizeCategory + 1, "For You", "Pose created specifically for you!", poseIDList);
+        YogaPosesManager.getInstance().addCategories(yogaCategory,sizeCategory + 1);
+        return sizeCategory + 1;
     }
 
     private void openFocus(int focusType) {
