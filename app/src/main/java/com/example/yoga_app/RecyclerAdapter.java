@@ -36,20 +36,30 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
         int index = position + 1;
-        YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(index);
-        holder.setImageView(yogaPose.getImage());
-        holder.setPoseTitle(yogaPose.getName());
+        // The API has a problem where the index 4 is null
+        // So I made and adjust index to skip null yoga poses
+        int adjustedIndex = index;
+        if (index >= 4) {
+            adjustedIndex++;
+        }
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, Detail.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("id",index);
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-            }
-        });
+        YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(adjustedIndex);
+
+        if (yogaPose != null) {
+            holder.setImageView(yogaPose.getImage());
+            holder.setPoseTitle(yogaPose.getName());
+
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, Detail.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("id", yogaPose.getPoseId());
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
+        } 
     }
 
     @Override

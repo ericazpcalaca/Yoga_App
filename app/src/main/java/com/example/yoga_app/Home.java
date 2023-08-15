@@ -49,7 +49,7 @@ public class Home extends Fragment {
                 int fixedTime = 20;
                 int workoutRange = YogaPosesManager.getInstance().getNumberOfCategories();
                 Random random = new Random();
-                int randomNumber = random.nextInt(workoutRange);
+                int randomNumber = random.nextInt(workoutRange) + 1;
                 Intent intent = new Intent(getActivity(), Workout.class);
                 intent.putExtra("workoutID",randomNumber);
                 intent.putExtra("selectedTime",fixedTime);

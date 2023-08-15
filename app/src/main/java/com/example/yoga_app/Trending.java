@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Trending extends AppCompatActivity {
     private RecyclerView recyclerView;

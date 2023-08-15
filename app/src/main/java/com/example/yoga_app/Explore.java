@@ -79,6 +79,8 @@ public class Explore extends Fragment {
             }
         });
 
+        //Created for you
+        
         //Getting Started
         //Seated Yoga
         btnFocusOne = view.findViewById(R.id.btnStartOne);

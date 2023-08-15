@@ -87,7 +87,7 @@
                 android:layout_marginStart="30dp"
                 android:scaleType="fitXY"
                 android:background="@android:color/transparent"
-                android:src="@drawable/focus_arm" />
+                android:src="@drawable/img_arm" />
 
             <ImageButton
                 android:id="@+id/focusTwo"
@@ -96,7 +96,7 @@
                 android:layout_marginStart="30dp"
                 android:scaleType="fitXY"
                 android:background="@android:color/transparent"
-                android:src="@drawable/focus_arm"/>
+                android:src="@drawable/img_hips"/>
 
         </LinearLayout>
 
@@ -113,7 +113,7 @@
                 android:layout_marginStart="30dp"
                 android:scaleType="fitXY"
                 android:background="@android:color/transparent"
-                android:src="@drawable/focus_arm"/>
+                android:src="@drawable/img_chest"/>
             <ImageButton
                 android:id="@+id/focusFour"
                 android:layout_width="wrap_content"
@@ -121,7 +121,7 @@
                 android:layout_marginStart="30dp"
                 android:scaleType="fitXY"
                 android:background="@android:color/transparent"
-                android:src="@drawable/focus_arm"/>
+                android:src="@drawable/img_balance"/>
         </LinearLayout>
 
         <Button
