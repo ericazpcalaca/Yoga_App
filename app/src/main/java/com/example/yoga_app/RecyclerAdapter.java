@@ -3,6 +3,7 @@ package com.example.yoga_app;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
-        YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(position);
+        int index = position + 1;
+        YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(index);
         holder.setImageView(yogaPose.getImage());
         holder.setPoseTitle(yogaPose.getName());
 
@@ -43,7 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             public void onClick(View v) {
                 Intent intent = new Intent(context, Detail.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("id",yogaPose.getPoseId());
+                bundle.putInt("id",index);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

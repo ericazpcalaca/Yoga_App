@@ -1,6 +1,7 @@
 package com.example.yoga_app;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -93,6 +94,7 @@ public class DataRetriever {
                             String urlImage = jsonObjectPose.getString("url_png");
                             YogaPose yogaPose = new YogaPose(poseId, poseName, poseDescription, poseBenefits, urlImage, level);
                             YogaPosesManager.getInstance().addPose(yogaPose);
+//                            Log.d("HM", yogaPose.toString());
                         }
 
                     } catch (JSONException e) {
@@ -102,7 +104,6 @@ public class DataRetriever {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //TODO: Handle error
-//                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
         requestQueue.add(jsonObjectRequest);

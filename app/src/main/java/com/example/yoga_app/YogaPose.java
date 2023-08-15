@@ -73,5 +73,18 @@ public class YogaPose {
 //        dest.writeString(benefits);
 //        dest.writeString(image);
 //    }
+
+
+    @Override
+    public String toString() {
+        return "YogaPose{" +
+                "poseId=" + poseId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", benefits='" + benefits + '\'' +
+                ", image='" + image + '\'' +
+                ", difficulty='" + difficulty + '\'' +
+                '}';
+    }
 }
 

@@ -21,7 +21,9 @@ public class Trending extends AppCompatActivity {
     private final String TYPE_INTERMEDIATE = "intermediate";
     private final String TYPE_EXPERT = "expert";
     private final String TYPE_BEGINNER = "beginner";
-
+    private final String TYPE_ARMS = "arm"; //ok
+    private final String TYPE_LEGS = "leg";
+    private final String TYPE_SHOULDER = "shoulder";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +47,37 @@ public class Trending extends AppCompatActivity {
 
         for (int i = 1; i < YogaPosesManager.getInstance().getNumberOfCategories(); i++) {
             if (type.equals(TYPE_STRENGTH) && YogaPosesManager.getInstance().getYogaCategoryByIndex(i).getDescriptionCategory().contains(TYPE_STRENGTH)) {
-                categoryListID.add(i);
+                if (!categoryListID.contains(i)) {
+                    categoryListID.add(i);
+                }
+            } else if (type.equals(TYPE_ARMS) && (YogaPosesManager.getInstance().getYogaCategoryByIndex(i).getDescriptionCategory()).contains(TYPE_ARMS)) {
+                if (!categoryListID.contains(i)) {
+                    categoryListID.add(i);
+                }
+            } else if (type.equals(TYPE_LEGS) && YogaPosesManager.getInstance().getYogaCategoryByIndex(i).getDescriptionCategory().contains(TYPE_LEGS)) {
+                if (!categoryListID.contains(i)) {
+                    categoryListID.add(i);
+                }
+            } else if (type.equals(TYPE_SHOULDER) && YogaPosesManager.getInstance().getYogaCategoryByIndex(i).getDescriptionCategory().contains(TYPE_SHOULDER)) {
+                if (!categoryListID.contains(i)) {
+                    categoryListID.add(i);
+                }
             } else if (type.equals(TYPE_INTERMEDIATE) && YogaPosesManager.getInstance().getLevelOfCategory(i).equals(TYPE_INTERMEDIATE)) {
-                categoryListID.add(i);
+                if (!categoryListID.contains(i)) {
+                    categoryListID.add(i);
+                }
             } else if (type.equals(TYPE_EXPERT) && YogaPosesManager.getInstance().getLevelOfCategory(i).equals(TYPE_EXPERT)) {
-                categoryListID.add(i);
+                if (!categoryListID.contains(i)) {
+                    categoryListID.add(i);
+                }
             } else if (type.equals(TYPE_BEGINNER) && YogaPosesManager.getInstance().getLevelOfCategory(i).equals(TYPE_BEGINNER)) {
-                categoryListID.add(i);
+                if (!categoryListID.contains(i)) {
+                    categoryListID.add(i);
+                }
             } else if (type.equals(TYPE_ALL)) {
-                categoryListID.add(i);
+                if (!categoryListID.contains(i)) {
+                    categoryListID.add(i);
+                }
             }
         }
 
