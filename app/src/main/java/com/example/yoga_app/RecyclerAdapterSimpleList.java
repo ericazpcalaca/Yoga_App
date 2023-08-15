@@ -43,7 +43,7 @@ public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdap
             public void onClick(View v) {
                 Intent intent = new Intent(context, Detail.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("id",poseListID.get(index));
+                bundle.putInt("id",poseListID.get(position));
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
