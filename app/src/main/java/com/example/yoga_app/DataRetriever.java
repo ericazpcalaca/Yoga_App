@@ -60,7 +60,8 @@ public class DataRetriever {
                                 e.printStackTrace();
                             }
                             YogaCategories yogaCategory = new YogaCategories(categoryID, categoryName, categoryDescription, poseIDList);
-                            YogaPosesManager.getInstance().addCategories(yogaCategory);
+//                            Log.d("OPA",yogaCategory.toString());
+                            YogaPosesManager.getInstance().addCategories(yogaCategory,categoryID);
                         }
 
                     } catch (JSONException e) {
@@ -93,8 +94,7 @@ public class DataRetriever {
                             String poseBenefits = jsonObjectPose.getString("pose_benefits");
                             String urlImage = jsonObjectPose.getString("url_png");
                             YogaPose yogaPose = new YogaPose(poseId, poseName, poseDescription, poseBenefits, urlImage, level);
-                            YogaPosesManager.getInstance().addPose(yogaPose);
-//                            Log.d("HM", yogaPose.toString());
+                            YogaPosesManager.getInstance().addPose(yogaPose,poseId);
                         }
 
                     } catch (JSONException e) {

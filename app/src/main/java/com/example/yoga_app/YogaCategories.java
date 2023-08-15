@@ -45,4 +45,15 @@ public class YogaCategories {
     public ArrayList<Integer> getPosesID() {
         return posesID;
     }
+
+    @Override
+    public String toString() {
+        return "YogaCategories{" +
+                "idCategory=" + idCategory +
+                ", nameCategory='" + nameCategory + '\'' +
+                ", descriptionCategory='" + descriptionCategory + '\'' +
+                ", posesID=" + posesID +
+                ", levelCategory='" + levelCategory + '\'' +
+                '}';
+    }
 }

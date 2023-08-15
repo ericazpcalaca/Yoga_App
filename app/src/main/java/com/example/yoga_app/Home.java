@@ -66,11 +66,12 @@ public class Home extends Fragment {
             }
         });
 
+        //Arm balance yoga
         btnFocusOne = view.findViewById(R.id.focusOne);
         btnFocusOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFocus(9); //Arm yoga
+                openFocus(10);
             }
         });
 

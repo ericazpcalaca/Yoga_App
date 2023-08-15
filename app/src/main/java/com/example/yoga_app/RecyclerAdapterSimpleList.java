@@ -16,11 +16,13 @@ import java.util.ArrayList;
 public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdapterSimpleList.ViewHolder> {
 
     private ArrayList<Integer> poseListID;
+    private int indexSelectedWorkout;
     private Context context;
 
-    public RecyclerAdapterSimpleList(Context context, ArrayList<Integer> poseListID){
+    public RecyclerAdapterSimpleList(Context context, ArrayList<Integer> poseListID, int indexSelectedWorkout){
         this.context = context;
         this.poseListID = poseListID;
+        this.indexSelectedWorkout = indexSelectedWorkout;
     }
 
     @NonNull
@@ -32,7 +34,7 @@ public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdap
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapterSimpleList.ViewHolder holder, int position) {
-        int index = position + 1;
+        int index = poseListID.get(position);
         YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(index);
         holder.setPoseTitle(yogaPose.getName());
 
@@ -41,7 +43,7 @@ public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdap
             public void onClick(View v) {
                 Intent intent = new Intent(context, Detail.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("id",index);
+                bundle.putInt("id",poseListID.get(index));
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

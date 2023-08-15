@@ -8,6 +8,9 @@ public class YogaPose {
     private String image;
     private String difficulty;
 
+    public YogaPose(int poseId) {
+    }
+
     public YogaPose(int poseId, String name, String description, String benefits, String image, String difficulty) {
         this.poseId = poseId;
         this.name = name;

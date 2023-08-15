@@ -79,36 +79,40 @@ public class Explore extends Fragment {
             }
         });
 
-        //Focus Part
+        //Getting Started
+        //Seated Yoga
         btnFocusOne = view.findViewById(R.id.btnStartOne);
         btnFocusOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFocus(1);
-            }
-        });
-
-        btnFocusTwo = view.findViewById(R.id.btnStartTwo);
-        btnFocusTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFocus(2);
             }
         });
 
-        btnFocusThree = view.findViewById(R.id.btnStartThree);
-        btnFocusThree.setOnClickListener(new View.OnClickListener() {
+        //Strengthening Yoga
+        btnFocusTwo = view.findViewById(R.id.btnStartTwo);
+        btnFocusTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFocus(3);
             }
         });
 
+        //ChestOpeningYoga
+        btnFocusThree = view.findViewById(R.id.btnStartThree);
+        btnFocusThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFocus(4);
+            }
+        });
+
+        //Backbend
         btnFocusFour = view.findViewById(R.id.btnStartFour);
         btnFocusFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFocus(4);
+                openFocus(5);
             }
         });
 

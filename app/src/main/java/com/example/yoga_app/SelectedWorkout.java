@@ -80,7 +80,7 @@ public class SelectedWorkout extends AppCompatActivity {
         workOutTitle.setText(yogaCategory.getNameCategory());
         workOutDesc.setText(yogaCategory.getDescriptionCategory());
 
-        adapter = new RecyclerAdapterSimpleList(SelectedWorkout.this,YogaPosesManager.getInstance().getPoseList(typeofWorkout));
+        adapter = new RecyclerAdapterSimpleList(SelectedWorkout.this,yogaCategory.getPosesID(),typeofWorkout);
         recyclerView.setAdapter(adapter);
 
         selectedTime = DEFAULT_TIME;

@@ -6,15 +6,15 @@ import java.util.Map;
 
 public class YogaPosesManager {
 
-    private ArrayList<YogaPose> poseList;
-    private ArrayList<YogaCategories> categoriesList;
+    private HashMap<Integer, YogaPose> poseList;
+    private HashMap<Integer, YogaCategories> categoriesList;
 
     private static YogaPosesManager instance;
 
     // Private constructor to prevent instantiation from outside
     private YogaPosesManager() {
-        poseList = new ArrayList<>();
-        categoriesList = new ArrayList<>();
+        poseList = new HashMap<>();
+        categoriesList = new HashMap<>();
     }
 
     // Static method to get the Singleton instance
@@ -25,12 +25,12 @@ public class YogaPosesManager {
         return instance;
     }
 
-    public void addPose(YogaPose pose) {
-        poseList.add(pose);
+    public void addPose(YogaPose pose, int poseID) {
+        poseList.put(poseID, pose);
     }
 
-    public void addCategories(YogaCategories category) {
-        categoriesList.add(category);
+    public void addCategories(YogaCategories category, int categoryID) {
+        categoriesList.put(categoryID, category);
     }
 
     public YogaPose getYogaPoseByIndex(int index) {
