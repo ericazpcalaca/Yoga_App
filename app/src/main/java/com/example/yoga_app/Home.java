@@ -70,7 +70,7 @@ public class Home extends Fragment {
         btnFocusOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFocus("arm");
+                openFocus(9); //Arm yoga
             }
         });
 
@@ -78,23 +78,25 @@ public class Home extends Fragment {
         btnFocusTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFocus("legs");
+                openFocus(7); // Tighs and hips
             }
         });
 
+        //Chest opening
         btnFocusThree = view.findViewById(R.id.focusThree);
         btnFocusThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFocus("shoulder");
+                openFocus(4);
             }
         });
 
+        //Balance
         btnFocusFour = view.findViewById(R.id.focusFour);
         btnFocusFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFocus("balance");
+                openFocus(11);
             }
         });
 
@@ -127,8 +129,8 @@ public class Home extends Fragment {
         startActivity(intent);
     }
 
-    private void openFocus(String focusType) {
-        Intent intent = new Intent(getActivity(), Trending.class);
+    private void openFocus(int focusType) {
+        Intent intent = new Intent(getActivity(), SelectedWorkout.class);
         intent.putExtra("type",focusType);
         startActivity(intent);
     }

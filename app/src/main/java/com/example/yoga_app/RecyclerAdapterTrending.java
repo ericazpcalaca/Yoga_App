@@ -45,7 +45,7 @@ public class RecyclerAdapterTrending extends RecyclerView.Adapter<RecyclerAdapte
 
                 Intent intent = new Intent(context, SelectedWorkout.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("type",yogaCategory.getIdCategory());
+                bundle.putInt("type",categoryListID.get(position));
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);

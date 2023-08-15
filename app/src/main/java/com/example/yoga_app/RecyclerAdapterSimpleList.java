@@ -32,7 +32,8 @@ public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdap
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapterSimpleList.ViewHolder holder, int position) {
-        YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(poseListID.get(position));
+        int index = position + 1;
+        YogaPose yogaPose = YogaPosesManager.getInstance().getYogaPoseByIndex(index);
         holder.setPoseTitle(yogaPose.getName());
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +41,7 @@ public class RecyclerAdapterSimpleList extends RecyclerView.Adapter<RecyclerAdap
             public void onClick(View v) {
                 Intent intent = new Intent(context, Detail.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("id",yogaPose.getPoseId());
+                bundle.putInt("id",index);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

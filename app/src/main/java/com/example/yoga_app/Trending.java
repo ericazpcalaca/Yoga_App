@@ -50,18 +50,6 @@ public class Trending extends AppCompatActivity {
                 if (!categoryListID.contains(i)) {
                     categoryListID.add(i);
                 }
-            } else if (type.equals(TYPE_ARMS) && (YogaPosesManager.getInstance().getYogaCategoryByIndex(i).getDescriptionCategory()).contains(TYPE_ARMS)) {
-                if (!categoryListID.contains(i)) {
-                    categoryListID.add(i);
-                }
-            } else if (type.equals(TYPE_LEGS) && YogaPosesManager.getInstance().getYogaCategoryByIndex(i).getDescriptionCategory().contains(TYPE_LEGS)) {
-                if (!categoryListID.contains(i)) {
-                    categoryListID.add(i);
-                }
-            } else if (type.equals(TYPE_SHOULDER) && YogaPosesManager.getInstance().getYogaCategoryByIndex(i).getDescriptionCategory().contains(TYPE_SHOULDER)) {
-                if (!categoryListID.contains(i)) {
-                    categoryListID.add(i);
-                }
             } else if (type.equals(TYPE_INTERMEDIATE) && YogaPosesManager.getInstance().getLevelOfCategory(i).equals(TYPE_INTERMEDIATE)) {
                 if (!categoryListID.contains(i)) {
                     categoryListID.add(i);
