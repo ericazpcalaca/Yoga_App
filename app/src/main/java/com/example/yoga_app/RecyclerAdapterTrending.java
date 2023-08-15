@@ -36,7 +36,7 @@ public class RecyclerAdapterTrending extends RecyclerView.Adapter<RecyclerAdapte
     public void onBindViewHolder(@NonNull RecyclerAdapterTrending.ViewHolder holder, int position) {
         YogaCategories yogaCategory = YogaPosesManager.getInstance().getYogaCategoryByIndex(categoryListID.get(position));
         holder.setPoseTitle(yogaCategory.getNameCategory());
-        holder.setLevelTrend("I will fix lol");
+        holder.setLevelTrend(YogaPosesManager.getInstance().getLevelOfCategory(categoryListID.get(position)));
         holder.setTimeTrend(convertToString(yogaCategory.getPosesID().size() * FIXED_TIME));
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {

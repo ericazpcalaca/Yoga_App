@@ -19,7 +19,6 @@
         tools:context=".Explore">
 
         <TextView
-            android:id="@+id/txtTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -60,27 +59,30 @@
                     android:text="all" />
 
                 <Button
+                    android:id="@+id/btnStrength"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/custom_button_two"
-                    android:textColor="@color/green_light"
+                    android:textColor="@color/black"
                     android:layout_marginStart="25dp"
                     android:textStyle="bold"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
-                    android:text="Beginner" />
+                    android:text="strength" />
                 <Button
+                    android:id="@+id/btnAbdominal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/custom_button_two"
-                    android:textColor="@color/green_light"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     android:layout_marginStart="25dp"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
-                    android:text="intermediate" />
+                    android:text="muscles" />
 
                 <Button
+                    android:id="@+id/btnExpert"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/custom_button_two"

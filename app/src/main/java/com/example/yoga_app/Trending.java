@@ -16,6 +16,10 @@ public class Trending extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private androidx.appcompat.widget.Toolbar toolbar;
     ArrayList<Integer> categoryListID;
+    private final String TYPE_ALL = "all";
+    private final String TYPE_STRENGTH = "strength";
+    private final String TYPE_ABDOMINAL = "abdominal";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +40,23 @@ public class Trending extends AppCompatActivity {
         String type = intent.getStringExtra("type");
         categoryListID = new ArrayList<>();
         //Create an list with the ID of the categories for display
-        for(int i = 1; i < YogaPosesManager.getInstance().getNumberOfCategories(); i++){
-            categoryListID.add(i);
+
+        for (int i = 1; i < YogaPosesManager.getInstance().getNumberOfCategories(); i++) {
+            if (type.equals(TYPE_STRENGTH) && YogaPosesManager.getInstance().getYogaCategoryByIndex(i).getDescriptionCategory().contains(TYPE_STRENGTH)) {
+                categoryListID.add(i);
+            } else if (type.equals(TYPE_ABDOMINAL) && YogaPosesManager.getInstance().getYogaCategoryByIndex(i).getDescriptionCategory().contains("muscles")) {
+                categoryListID.add(i);
+            } else if (type.equals(TYPE_ALL)) {
+                categoryListID.add(i);
+            }
         }
+
         recyclerView = findViewById(R.id.recyclerViewTrend);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         DataRetriever dataRetriever = new DataRetriever(this);
-        adapter = new RecyclerAdapterTrending(Trending.this,categoryListID);
+        adapter = new RecyclerAdapterTrending(Trending.this, categoryListID);
         recyclerView.setAdapter(adapter);
 
     }
