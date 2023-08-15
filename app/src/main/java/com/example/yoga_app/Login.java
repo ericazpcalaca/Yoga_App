@@ -23,6 +23,8 @@ public class Login extends AppCompatActivity {
 
     private TextView btnRegister;
     private TextView btnRecovery;
+    private TextView txtNotification;
+    private TextView txtNotificationPassword;
     private EditText textEmail;
     private EditText textPassword;
     private Button btnLogin;
@@ -34,7 +36,7 @@ public class Login extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
@@ -52,12 +54,14 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         textEmail = findViewById(R.id.inputEmail);
         textPassword = findViewById(R.id.inputPassword);
+        txtNotification = findViewById(R.id.txtNotification);
+        txtNotificationPassword = findViewById(R.id.txtNotificationPassword);
 
         //Open the Register activity
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Login.this,Register.class));
+                startActivity(new Intent(Login.this, Register.class));
             }
         });
 
@@ -70,15 +74,21 @@ public class Login extends AppCompatActivity {
                 password = textPassword.getText().toString();
 
                 //Check if the fields aren't empty
-                // MAIS TARDE COLOCAR EM TEXT VIEW
-                if(email.isEmpty()){
-                    Toast.makeText(Login.this,"Enter Email", Toast.LENGTH_SHORT).show();
+                //Display message error accordingly
+                if (email.isEmpty()) {
+                    txtNotification.setVisibility(View.VISIBLE);
+                    txtNotification.setText("Please, enter the e-mail");
                     return;
+                } else {
+                    txtNotification.setVisibility(View.GONE);
                 }
 
-                if(password.isEmpty()){
-                    Toast.makeText(Login.this,"Enter Password", Toast.LENGTH_SHORT).show();
+                if (password.isEmpty()) {
+                    txtNotificationPassword.setVisibility(View.VISIBLE);
+                    txtNotificationPassword.setText("Please, enter the password");
                     return;
+                } else {
+                    txtNotification.setVisibility(View.GONE);
                 }
 
                 mAuth.signInWithEmailAndPassword(email, password)
@@ -91,19 +101,18 @@ public class Login extends AppCompatActivity {
                                     finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(Login.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                    txtNotificationPassword.setVisibility(View.VISIBLE);
+                                    txtNotificationPassword.setText("Incorrect username or password.");
                                 }
                             }
                         });
-
             }
         });
 
         btnRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Login.this,Recovery.class));
+                startActivity(new Intent(Login.this, Recovery.class));
             }
         });
     }
