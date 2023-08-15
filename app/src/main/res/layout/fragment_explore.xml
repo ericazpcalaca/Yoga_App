@@ -59,6 +59,18 @@
                     android:text="all" />
 
                 <Button
+                    android:id="@+id/btnBeginner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_button_two"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginStart="25dp"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:text="beginner" />
+
+                <Button
                     android:id="@+id/btnStrength"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -69,8 +81,9 @@
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
                     android:text="strength" />
+
                 <Button
-                    android:id="@+id/btnAbdominal"
+                    android:id="@+id/btnIntermediate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/custom_button_two"
@@ -79,14 +92,14 @@
                     android:layout_marginStart="25dp"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
-                    android:text="muscles" />
+                    android:text="intermediate" />
 
                 <Button
                     android:id="@+id/btnExpert"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/custom_button_two"
-                    android:textColor="@color/green_light"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     android:layout_marginStart="25dp"
                     android:paddingStart="25dp"

@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:text="Test"
             android:textColor="@color/black"
+            android:textAllCaps="true"
             android:textSize="17sp" />
 
     </LinearLayout>

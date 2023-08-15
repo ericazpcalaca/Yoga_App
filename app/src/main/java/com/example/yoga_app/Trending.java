@@ -18,7 +18,9 @@ public class Trending extends AppCompatActivity {
     ArrayList<Integer> categoryListID;
     private final String TYPE_ALL = "all";
     private final String TYPE_STRENGTH = "strength";
-    private final String TYPE_ABDOMINAL = "abdominal";
+    private final String TYPE_INTERMEDIATE = "intermediate";
+    private final String TYPE_EXPERT = "expert";
+    private final String TYPE_BEGINNER = "beginner";
 
 
     @Override
@@ -44,7 +46,11 @@ public class Trending extends AppCompatActivity {
         for (int i = 1; i < YogaPosesManager.getInstance().getNumberOfCategories(); i++) {
             if (type.equals(TYPE_STRENGTH) && YogaPosesManager.getInstance().getYogaCategoryByIndex(i).getDescriptionCategory().contains(TYPE_STRENGTH)) {
                 categoryListID.add(i);
-            } else if (type.equals(TYPE_ABDOMINAL) && YogaPosesManager.getInstance().getYogaCategoryByIndex(i).getDescriptionCategory().contains("muscles")) {
+            } else if (type.equals(TYPE_INTERMEDIATE) && YogaPosesManager.getInstance().getLevelOfCategory(i).equals(TYPE_INTERMEDIATE)) {
+                categoryListID.add(i);
+            } else if (type.equals(TYPE_EXPERT) && YogaPosesManager.getInstance().getLevelOfCategory(i).equals(TYPE_EXPERT)) {
+                categoryListID.add(i);
+            } else if (type.equals(TYPE_BEGINNER) && YogaPosesManager.getInstance().getLevelOfCategory(i).equals(TYPE_BEGINNER)) {
                 categoryListID.add(i);
             } else if (type.equals(TYPE_ALL)) {
                 categoryListID.add(i);

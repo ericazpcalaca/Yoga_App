@@ -15,15 +15,19 @@ import android.widget.ImageButton;
 public class Explore extends Fragment {
 
     private Button btnAll;
+    private Button btnBeginner;
+    private Button btnExpert;
     private Button btnStrength;
-    private Button btnAbdominal;
+    private Button btnIntermediate;
     private ImageButton btnFocusOne;
     private ImageButton btnFocusTwo;
     private ImageButton btnFocusThree;
     private ImageButton btnFocusFour;
     private final String TYPE_ALL = "all";
     private final String TYPE_STRENGTH = "strength";
-    private final String TYPE_ABDOMINAL = "abdominal";
+    private final String TYPE_INTERMEDIATE = "intermediate";
+    private final String TYPE_EXPERT = "expert";
+    private final String TYPE_BEGINNER = "beginner";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -43,6 +47,22 @@ public class Explore extends Fragment {
             }
         });
 
+        btnBeginner = view.findViewById(R.id.btnBeginner);
+        btnBeginner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTag(TYPE_BEGINNER);
+            }
+        });
+
+        btnExpert = view.findViewById(R.id.btnExpert);
+        btnExpert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTag(TYPE_EXPERT);
+            }
+        });
+
         btnStrength = view.findViewById(R.id.btnStrength);
         btnStrength.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,15 +71,15 @@ public class Explore extends Fragment {
             }
         });
 
-        btnAbdominal = view.findViewById(R.id.btnAbdominal);
-        btnAbdominal.setOnClickListener(new View.OnClickListener() {
+        btnIntermediate = view.findViewById(R.id.btnIntermediate);
+        btnIntermediate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openTag(TYPE_ABDOMINAL);
+                openTag(TYPE_INTERMEDIATE);
             }
         });
 
-
+        //Focus Part
         btnFocusOne = view.findViewById(R.id.btnStartOne);
         btnFocusOne.setOnClickListener(new View.OnClickListener() {
             @Override
