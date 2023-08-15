@@ -1,7 +1,6 @@
 package com.example.yoga_app;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,11 +31,11 @@ public class DataRetriever {
 
         //Retrieve yoga categories
         if (YogaPosesManager.getInstance().getNumberOfCategories() == 0) {
-            fetchAllYogaWorkout();
+            fetchAllYogaCategories();
         }
     }
 
-    private void fetchAllYogaWorkout() {
+    private void fetchAllYogaCategories() {
         String url = "https://yoga-api-nzy4.onrender.com/v1/categories";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest

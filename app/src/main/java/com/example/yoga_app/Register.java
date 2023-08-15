@@ -25,6 +25,7 @@ public class Register extends AppCompatActivity {
     private TextView btnSignIn;
     private EditText textEmail;
     private EditText textPassword;
+    private TextView txtNotificationCreateAcc;
     private FirebaseAuth mAuth;
     private androidx.appcompat.widget.Toolbar toolbar;
     FirebaseDatabase database;
@@ -40,6 +41,7 @@ public class Register extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         btnSignIn = findViewById(R.id.backToSignIn);
         toolbar = findViewById(R.id.toolbarRegister);
+        txtNotificationCreateAcc = findViewById(R.id.txtNotificationCreateAcc);
 
         // Initialize Firebase
         FirebaseApp.initializeApp(this);
@@ -47,7 +49,6 @@ public class Register extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         // Create a reference to the "users" node
         userRef = database.getReference("users");
-
 
         //Set a back to main page button on top
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_ios_24);
@@ -78,13 +79,19 @@ public class Register extends AppCompatActivity {
                 //Check if the fields aren't empty
                 // MAIS TARDE COLOCAR EM TEXT VIEW
                 if(email.isEmpty()){
-                    Toast.makeText(Register.this,"Enter Email", Toast.LENGTH_SHORT).show();
+                    txtNotificationCreateAcc.setVisibility(View.VISIBLE);
+                    txtNotificationCreateAcc.setText("Please complete all the fields");
                     return;
+                } else{
+                    txtNotificationCreateAcc.setVisibility(View.GONE);
                 }
 
                 if(password.isEmpty()){
-                    Toast.makeText(Register.this,"Enter Password", Toast.LENGTH_SHORT).show();
+                    txtNotificationCreateAcc.setVisibility(View.VISIBLE);
+                    txtNotificationCreateAcc.setText("Please complete all the fields");
                     return;
+                } else{
+                    txtNotificationCreateAcc.setVisibility(View.GONE);
                 }
 
                 //Firebase code to create new account
@@ -101,8 +108,8 @@ public class Register extends AppCompatActivity {
 
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(Register.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                    txtNotificationCreateAcc.setVisibility(View.VISIBLE);
+                                    txtNotificationCreateAcc.setText("Authentication failed \nPlease check the email or the minimum of length for the password");
                                 }
                             }
                         });
