@@ -70,7 +70,6 @@ public class DataRetriever {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //TODO: Handle error
-//                        Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
         requestQueue.add(jsonArrayRequest);

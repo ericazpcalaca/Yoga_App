@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class Workout extends AppCompatActivity {
@@ -52,6 +54,11 @@ public class Workout extends AppCompatActivity {
     private FirebaseAuth auth;
     private int updateWorkout;
     private int updateMinutes;
+    private int updateCurrentStrike;
+    private int updateBestStrike;
+    private int currDay;
+    private int currMonth;
+    private int currYear;
 
 
     @Override
@@ -248,10 +255,49 @@ public class Workout extends AppCompatActivity {
                 if (userProgress != null) {
                     updateWorkout = userProgress.getTotalWorkout();
                     updateMinutes = userProgress.getTotalMinutes();
+                    updateCurrentStrike = userProgress.getCurrentStreak();
+                    updateBestStrike = userProgress.getBestStreak();
+                    currDay = userProgress.getLastFinishedDay();
+                    currMonth = userProgress.getLastFinishedMonth();
+                    currYear = userProgress.getLastFinishedYear();
+
+                    //Get today's date
+                    Calendar c = Calendar.getInstance();
+                    int day = c.get(Calendar.DAY_OF_MONTH);
+                    int month = c.get(Calendar.MONTH) + 1;
+                    int year = c.get(Calendar.YEAR);
+
+                    //Check if it is the first time the user is using the app
+                    //In case it is, set up for today's date
+                    if (currDay == 0){
+                        currYear = year;
+                        currDay = day;
+                        currMonth = month;
+                    }
+
+                    if((day - currDay  == 1) && (currMonth == month) && (currYear == year)){
+                        updateCurrentStrike++;
+                        currYear = year;
+                        currDay = day;
+                        currMonth = month;
+                    }else if ((day - currDay > 1) && (currMonth == month) && (currYear == year)){
+                        updateCurrentStrike = 0;
+                    }
+
                     updateMinutes += (selectedTime * workOutIDs.size() / 60);
                     updateWorkout++;
+
+                    if(updateCurrentStrike > updateBestStrike){
+                        updateBestStrike = updateCurrentStrike;
+                        userRef.child("bestStreak").setValue(updateBestStrike);
+                    }
                     userRef.child("totalWorkout").setValue(updateWorkout);
                     userRef.child("totalMinutes").setValue(updateMinutes);
+                    userRef.child("currentStreak").setValue(updateCurrentStrike);
+                    userRef.child("lastFinishedDay").setValue(currDay);
+                    userRef.child("lastFinishedMonth").setValue(currMonth);
+                    userRef.child("lastFinishedYear").setValue(currYear);
+
                 }
 
             }
