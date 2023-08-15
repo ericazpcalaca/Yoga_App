@@ -121,10 +121,10 @@
         <ImageButton
             android:id="@+id/btnCreatedForYou"
             android:layout_width="match_parent"
-            android:layout_height="161dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher_background" />
+            android:layout_height="200dp"
+            android:layout_marginTop="15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/custom_workout" />
 
         <TextView
             android:id="@+id/txtFocus"
