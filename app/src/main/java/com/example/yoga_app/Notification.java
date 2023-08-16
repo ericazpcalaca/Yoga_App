@@ -1,11 +1,14 @@
 package com.example.yoga_app;
 
+import static android.app.PendingIntent.FLAG_IMMUTABLE;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -16,6 +19,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class Notification extends AppCompatActivity {
 
@@ -39,13 +45,29 @@ public class Notification extends AppCompatActivity {
             }
         });
 
-
         btnNotification = findViewById(R.id.btnSetNotification);
         btnNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 askPermission();
-                makeNotification();
+                
+                Intent notificationIntent = new Intent(getApplicationContext(), NotificationBroadcastReceiver.class);
+                PendingIntent alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, notificationIntent, FLAG_IMMUTABLE);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+                long timeAtButtonClick = System.currentTimeMillis();
+                long tenSecondsInMillis = 1000 * 10;
+
+                // Set the time for the daily notification (for example, 9:00 AM)
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, 2);
+                calendar.set(Calendar.MINUTE, 10);
+
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),
+                        AlarmManager.INTERVAL_DAY,  // Repeat every day
+                        alarmIntent);
+                Toast.makeText(Notification.this, "Reminder Activate",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -60,33 +82,4 @@ public class Notification extends AppCompatActivity {
         }
     }
 
-    public void makeNotification(){
-        String channelID = "CHANNEL_ID_NOTIFICATION";
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),channelID);
-        builder.setSmallIcon(R.drawable.yogaapp)
-                .setContentTitle("Are you ready do do some exercises?")
-                .setContentText("Tap to start now!")
-                .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,intent,PendingIntent.FLAG_MUTABLE);
-        builder.setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelID);
-            if (notificationChannel == null){
-                int importance = NotificationManager.IMPORTANCE_HIGH;
-                notificationChannel = new NotificationChannel(channelID,"Yoga",importance);
-                notificationChannel.enableVibration(true);
-                notificationManager.createNotificationChannel(notificationChannel);
-            }
-        }
-
-        notificationManager.notify(0, builder.build());
-    }
 }
