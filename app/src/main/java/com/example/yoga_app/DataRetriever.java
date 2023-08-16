@@ -59,7 +59,6 @@ public class DataRetriever {
                                 e.printStackTrace();
                             }
                             YogaCategories yogaCategory = new YogaCategories(categoryID, categoryName, categoryDescription, poseIDList);
-//                            Log.d("OPA",yogaCategory.toString());
                             YogaPosesManager.getInstance().addCategories(yogaCategory,categoryID);
                         }
 
@@ -71,6 +70,7 @@ public class DataRetriever {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //TODO: Handle error
+
                     }
                 });
         requestQueue.add(jsonArrayRequest);

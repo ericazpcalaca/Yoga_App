@@ -199,6 +199,8 @@ public class AccountSettings extends AppCompatActivity {
                     } else if(type.equals("height")){
                         userRef.child("userHeight").setValue(isThisANumber);
                     }
+                }else{
+                    Toast.makeText(AccountSettings.this,"Please insert a number",Toast.LENGTH_SHORT).show();
                 }
             }
         });
