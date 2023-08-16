@@ -55,14 +55,12 @@ public class Notification extends AppCompatActivity {
                 PendingIntent alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, notificationIntent, FLAG_IMMUTABLE);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-                long timeAtButtonClick = System.currentTimeMillis();
-                long tenSecondsInMillis = 1000 * 10;
 
-                // Set the time for the daily notification (for example, 9:00 AM)
+                // Set the time for the daily notification
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY, 2);
-                calendar.set(Calendar.MINUTE, 10);
+                calendar.set(Calendar.HOUR_OF_DAY, 9);
+                calendar.set(Calendar.MINUTE, 30);
 
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),
                         AlarmManager.INTERVAL_DAY,  // Repeat every day
