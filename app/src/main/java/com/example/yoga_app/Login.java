@@ -57,6 +57,8 @@ public class Login extends AppCompatActivity {
         txtNotification = findViewById(R.id.txtNotification);
         txtNotificationPassword = findViewById(R.id.txtNotificationPassword);
 
+        DataRetriever dataRetriever = new DataRetriever(this);
+
         //Open the Register activity
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +67,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //Open the Login Activity
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +112,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //Open the Recovery Password Activity
         btnRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

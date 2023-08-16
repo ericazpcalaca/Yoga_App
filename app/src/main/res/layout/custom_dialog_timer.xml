@@ -12,11 +12,13 @@
         android:textColor="@color/black"
         android:textSize="15sp"
         android:paddingStart="10sp"/>
+
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:theme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:checkedButton="@id/option2"
+        android:theme="@style/ThemeOverlay.AppCompat.Light">
 
         <RadioButton
             android:id="@+id/option1"
