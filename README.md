@@ -54,10 +54,10 @@ You can also set a Notification to show up daily for the user
 The user will be able to share the app with friends.
 
 ## Preview
-|<img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/957f21ab-7405-4cae-a169-d09d17d77837" width="280" height="510"> |  <img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/2f383099-b245-49c9-a725-d60162f3499c" width="280" height="510"> | <img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/78630883-7a46-45f7-85bd-20bcc0179204" width="280" height="510">  |
+|<img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/957f21ab-7405-4cae-a169-d09d17d77837" width="300" height="510"> |  <img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/2f383099-b245-49c9-a725-d60162f3499c" width="300" height="510"> | <img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/78630883-7a46-45f7-85bd-20bcc0179204" width="300" height="510">  |
 |----------|----------|----------|
-| <img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/719d5811-b20e-42f3-9625-6e2ce2b6e93e" width="280" height="510">  | <img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/132ca46d-be7b-4b4a-b09c-7ae53bc2d5a6" width="280" height="510">  | <img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/6e18fbac-9b2d-4cfc-8253-ce42cf656e39" width="280" height="510">  |
-|<img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/fa80b22d-f561-4a0b-af13-2c417e46d060" width="280" height="510"> |<img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/f684328c-ded9-475a-b520-31312ebb4593" width="280" height="510">  |  |
+| <img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/719d5811-b20e-42f3-9625-6e2ce2b6e93e" width="300" height="510">  | <img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/132ca46d-be7b-4b4a-b09c-7ae53bc2d5a6" width="300" height="510">  | <img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/6e18fbac-9b2d-4cfc-8253-ce42cf656e39" width="300" height="510">  |
+|<img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/fa80b22d-f561-4a0b-af13-2c417e46d060" width="300" height="510"> |<img src="https://github.com/ericazpcalaca/Yoga_App/assets/15451346/f684328c-ded9-475a-b520-31312ebb4593" width="300" height="510">  |  |
 
 ## Video
 https://github.com/ericazpcalaca/Yoga_App/assets/15451346/e08baef2-c2a1-4ae1-bd7d-a290fcbe8e43
